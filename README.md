@@ -1,4 +1,4 @@
-对现有的WEB和移动端开发PC客户端。主要包含项消息，语音会议，邮件等。整个技术栈是基于NW,采用anguar+requirejs构建。
+PC桌面端，主要包含消息，通讯录，语音会议，邮件等。整个技术栈是基于NW,采用anguar+requirejs构建。
 
  **开发** 
 使用node 启动web-server.js

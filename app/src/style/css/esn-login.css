@@ -1,0 +1,259 @@
+.esn-box-header {
+    height: 40px;
+    position: fixed;
+    top: 0;
+    left: 70px;
+    right: 0;
+    z-index: 100;
+    -webkit-user-select:none;
+    -webkit-app-region:drag;
+}
+.esn-login-container{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+    /*background:url('../images/bg.jpg') no-repeat scroll center center;*/
+    background: linear-gradient(40deg, #3aa6f6, #8cdfba);
+    background-size:cover ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /*-webkit-user-select:none;*/
+    /*-webkit-app-region:drag;*/
+}
+.esn-login-box {
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.18);
+    height: 490px;
+    width:380px;
+    border-radius: 4px;
+    background: #fff;
+}
+.esn-login-box-header {
+    height:146px;
+    background: #F0F4F6;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.esn-box-header-icon {
+    height: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.esn-box-info-icon {
+    background: #fff;
+    border-radius: 80px;
+    height: 80px;
+    width: 80px;
+}
+.esn-box-header-tab {
+    height:42px;
+    display: flex;
+    align-items: center;
+}
+.esn-header-tab-btn {
+    height: 42px;
+    width: 189px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.esn-tab-btn-lable{
+    cursor: pointer;
+    display: -webkit-inline-box;
+    width: 140px;
+    height: 42px;
+    line-height: 40px;
+    text-align: -webkit-center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #8899A6;
+}
+.esn-tab-btn-lable:hover {
+    /*border-bottom: solid 3px #007DDC;*/
+    line-height: 40px;
+    color: #007DDC;
+}
+.esn-tab-btn-lable.active {
+    border-bottom: solid 3px #007DDC;
+    line-height: 40px;
+    color: #007DDC;
+}
+
+.esn-tab-separator{
+    background: #E2E8ED;
+    width: 2px;
+    height: 23px;
+}
+.esn-login-box-Qr{
+    display: none;
+    height:345px;
+}
+.esn-box-account-row {
+    height:52px;
+    width: 320px;
+    margin: auto;
+}
+.esn-box-account-row.esn-min-row {
+    height: 40px;
+    line-height: 40px;
+}
+.esn-box-account-row.underline {
+    border-bottom: solid 1px #EBEFF4;
+}
+.esn-login-box-input{
+    height: 52px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: #B4B4B4;
+}
+.form-icon-adjust{
+  color: #ced6e1;
+  font-size: 20px;
+}
+.esn-login-input {
+
+    height: 36px;
+    width: 270px;
+    margin-left: 5px;
+    border: none;
+    outline: none;
+}
+.esn-login-box-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+label.avepwd {
+    color: #8899A6;
+    font-size: 12px;
+}
+label.avepwd .cb-savepwd {
+    margin-right: 5px;
+}
+span.forgotPwd {
+    font-size: 12px;
+    color: #8899A6;
+}
+
+.esn-login-btn {
+    background: #0093ff;
+    border: none;
+    width: 320px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    opacity: .3;
+}
+
+.esn-login-btn.active{
+  opacity: 1;
+}
+
+.esn-login-box-cross{
+    cursor: pointer;
+    font-size: 22px;
+    color: #CED6E1;
+    display: -webkit-inline-box;
+    border-radius: 15px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: -webkit-center;
+}
+.esn-login-box-eye{
+    cursor: pointer;
+    font-size: 22px;
+    color: #CED6E1;
+}
+.esn-login-box-eye.active{
+  color: #57b8ff;
+}
+
+.esn-g-box {
+    position: fixed;
+    left: 6px;
+    top: 17px;
+}
+
+.esn-g-btn {
+    border-radius: 15px;
+    display: inline-block;
+    margin-right: 3px;
+    height: 12px;
+    width: 12px;
+    cursor: pointer;
+    text-align: -webkit-center;
+    line-height: 11px;
+    vertical-align: middle;
+    color: rgba(0, 0, 0, 0.50);
+}
+.esn-login-foot {
+    margin-top: 22px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.red {
+    background: #FB5F57;
+}
+
+.esn-qrcode {
+    margin: 55px auto 0px;
+    height: 192px;
+    position: relative;
+}
+.esn-qrcode-info{
+    text-align: center;
+    padding-top: 8px;
+    color: rgba(41, 47, 51, 0.65);
+}
+.esn-qrcode-info span{
+  color: #007DDC;
+  cursor:pointer;
+}
+.esn-qrcode-mask{
+    height: 192px;
+    width: 192px;
+    background: rgba(41, 47, 51, 0.89);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+}
+a.forgotPwd ,a.register{
+    text-decoration: none;
+    color: #007DDC;
+    font-size: 12px;
+}
+.esn-login-box-foot {
+    height:136px;
+}
+a.register {
+    padding-right: 26px;
+}
+.esn-login-box-foot-three {
+    height: 94px;
+}
+.esn-login-box-foot-register {
+    height:40px;
+    line-height: 40px;
+    text-align: right;
+}

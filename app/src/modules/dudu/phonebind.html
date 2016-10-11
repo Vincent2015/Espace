@@ -1,0 +1,60 @@
+<div class="esn-right-dialog">
+
+  <div class="charge-head">
+
+    <span class="icon-web_icon_close charge-icon" ng-click="closeDiag()"></span>
+
+    <span>绑定手机号</span>
+  </div>
+  <!--步骤一-->
+  <div ng-show="bind_step==1">
+    <div class="charge-input">
+
+      <div class="line-divide-wrapper" style="border-bottom:0;color:#0D80F2; padding-left: 12px;height:40px;">
+          <div class="table-cell">请输入手机号进行账号绑定</div>
+      </div>
+
+      <div class="verify-input-table">
+        <div class="table-cell-c table-cell-c-t phone-before" style="color: black;" >
+          +86
+        </div>
+        <div class="table-cell">
+          <input type="text" placeholder="" style="border-bottom: solid 1px transparent;" ng-model="validate.phone">
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-charge" ng-click="validate.phoneResult ? PhoneBind.next() : ''" style="{{validate.phoneResult ? '':'background: #99ccff;'}}">
+       下一步
+    </div>
+  </div>
+
+  <!--步骤二-->
+  <div ng-show="bind_step==2">
+    <div class="charge-input">
+
+      <div class="line-divide-wrapper" style="border-bottom:0;color:black;  padding-left: 12px;height:40px;">
+          <div class="table-cell">已向{{validate.phone}}发送验证码</div>
+      </div>
+
+      <div class="verify-input-table">
+        <div class="table-cell">
+          <input type="text" placeholder="请输入验证码" style="border-bottom: solid 1px transparent;" ng-model="validate.code">
+        </div>
+        <div class="table-cell-c" style="width:110px;">
+          <div class="btn-charge" ng-click="PhoneBind.reSendCode()" style="width:92px;margin:0px; background: #3399ff;font-size:13px; height: 31px;" ng-class="{true: 'btn-charge vcode-status', false: 'btn-charge'}[PhoneBind.vcode_status == 1]" >
+             {{PhoneBind.vcode_text}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="btn-charge" ng-click="PhoneBind.phoneBindComplete()" style="{{validate.codeResult ? '' : 'background: #99ccff'}}">
+       绑定
+    </div>
+  </div>
+
+
+
+</div>

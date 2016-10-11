@@ -1,0 +1,405 @@
+<div class="loading-animation cen-align hidden">
+	<span></span>
+	<span></span>
+	<span></span>
+</div>
+<div class="im-sendfile-dialog-wrapper" ng-if="isShowSendFileDialog">
+	<div class='im-sendfile-bk' ng-click='hideSendFileDialig($event)'></div>
+	<div class='im-sendfile-dialog'>
+		<div class='im-sendfile-dialog-header'><span ng-click="hideSendFileDialig($event)" class='im-sendfile-close'>×</span>发送文件</div>
+		<img class='im-sendfile-image' ng-src="{{filetype}}" err-src="./src/style/css/images/filetype/other@2x.png"/>
+		<div class='im-sendfile-name' ng-bind='sendfilename'></div>
+		<div class='im-sendfile-size' ng-bind='sendfilesize'></div>
+		<div class='im-sendfile-size' ng-if="sizeFormatted>100" style="color:red;" ng-bind="'文件超过100M,不能发送'"></div>
+		<button class='im-sendfile-btn' ng-if="sizeFormatted<=100" ng-click='realSendFile()'>发送</button>
+	</div>
+</div>
+
+<div class="im-sendfile-dialog-wrapper" ng-if="isShowSendImageDialog">
+	<div class='im-sendfile-bk' ng-click='hideSendImageDialig($event)'></div>
+	<div class='im-sendfile-dialog'>
+		<div class='im-sendfile-dialog-header'><span ng-click="hideSendImageDialig($event)" class='im-sendfile-close'>×</span>发送图片</div>
+		<img class='im-sendfile-image' ng-src="{{imagefiletype}}" err-src="./src/style/css/images/filetype/image@2x.png"/ 	ng-class="{screencapture : isScreenCut}" >
+		<div class='im-sendfile-name' ng-bind='imagename'></div>
+		<div class='im-sendfile-size' ng-bind='sendimagefilesize'></div>
+		<button class='im-sendfile-btn' ng-click='realSendPicFile()'>发送</button>
+	</div>
+</div>
+<!--<div ng-include="'src/modules/yxim/template/group-setup.htm'"></div>-->
+
+<!--  IMChat 对话title -->
+<div class="IMChat-title cl" ng-if="'DIALOGTITLE' | getSpectacle">
+	<!-- <h2 class="title-item single z text-ellipsis"
+		ng-if="chattype.chattype=='chat'" title="查看个人信息"
+		ng-click="checkRosterInfo($event,entity.id)" ng-bind="entity.name | limitTo:50"></h2> -->
+	<h2 class="title-item single z text-ellipsis"
+		ng-if="chattype.chattype=='chat'" title="查看个人信息"
+		ng-bind="entity.name | limitTo:50" ng-click="userCard(entity.id,entity)"></h2>
+	<h2 class="title-item group z text-ellipsis" ng-if="chattype.chattype=='groupchat'" ng-bind="entity.name | limitTo:50"></h2>
+	<h2 class="title-item group z text-ellipsis"  ng-if="chattype.chattype=='pubaccount'" ng-bind="entity.name | limitTo:50"></h2>
+
+	<ul class="operate-item y">
+		<li class="icon-web_icon_file im-toolbar-icon" ng-show="chatiteminfo.type=='chat'" title="" ng-click="showShareFiles(entity)"></li>
+		<li class="icon-web_icon_teamset im-toolbar-icon" ng-show="chatiteminfo.type=='chat'" title="单聊转群聊" ng-click="personSetup_Click(entity)"></li>
+		<!-- <li class="icon-web_icon_dudu im-toolbar-icon" ng-show="chatiteminfo.type=='chat'" title=""></li>
+		<li class="icon-web_icon_history-23 im-toolbar-icon" ng-show="chatiteminfo.type=='chat'" title=""></li> -->
+
+		<li class="icon-web_icon_file im-toolbar-icon" ng-show="chatiteminfo.type=='groupchat'" title="" ng-click="showShareFiles(entity)"></li>
+		<li class="icon-web_icon_teamset im-toolbar-icon" ng-show="chatiteminfo.type=='groupchat'" title="群组信息" ng-click="setGroup()"></li>
+	</ul>
+
+
+	<!-- 功能菜单 -->
+	<!--<ul class="IMChat-fun-menu cl" ng-if="chattype.chattype=='groupchat'">
+		<li class="cur" ng-click="tunToFunMenu($event,'info')">动态</li>
+		<li class="task" ng-click="tunToFunMenu($event,'task')">任务</li>
+		<li class="doc" ng-click="tunToFunMenu($event,'doc')">文件</li>
+		<li class="meeting" ng-click="tunToFunMenu($event,'meeting')">会议</li>
+	</ul>-->
+</div>
+
+<!-- 消息、人员展现窗口 -->
+<div id="project-content-container" class="cl" ng-show="loadMenu">
+
+</div>
+
+<iframe id="loadfileframe" style="width:0px;height:0px;visiblity:hidden;opacity:0;"/>
+<div class="IMChat-entity-container"  ng-show="!loadMenu"  ng-class="{pubaccount:chatiteminfo.type=='pubaccount'}">
+	<div class="IMChat-entity-display message" im-scroll  can-load="canLoad">
+		<!-- infinite-scroll="pullHistoryMessage()" -->
+		<!-- 消息实体 -->
+		<ul class="message-entity" ng-click="scanePic($event);">
+
+
+			<!--   <li class="operate-reminder">您已经添加康康为好友</li>-->
+			<!-- 时间提示 -->
+			<!--    <li class="timer-reminder">昨天 21:50</li> track by $index |date:'MM-dd HH:mm'-->
+
+			<li class="cl" ng-repeat="item in chatMessages" ng-class="{true:'message-iterlocutors',false:'message-self'}[item.received==true]">
+				<div class="msg-time"  ng-bind="formatTime(item.dateline)" ng-if="!!item.showInterval"></div>
+
+				<!--单聊-->
+				<div class="cl" ng-class="{true:'z',false:'y'}[item.received==true]" ng-if="item.type=='chat' && !item.revocation">
+					<span ng-click="item.received==true ? checkRosterInfo(item.from.id,item):showUserInfo()"
+								class="photocard avt-s-l"
+								ng-class="{true:'z',false:'y'}[item.received==true]">
+								<headerphoto item="item"></headerphoto>
+								<!-- <img err-src="./src/style/css/images/default_photo.jpg" width="40" height="40" ng-src="{{!item.from.vcard.avatar||item.from.vcard.avatar==''?'./src/style/css/images/default_photo.jpg':item.from.vcard.avatar}}"/> -->
+					</span>
+					<div class="dialog-card">
+						<div class="namecard" ng-bind="item.from.name">
+						</div>
+						<!-- <em class="arrow">
+	                    	<span></span>
+	                    	<span></span>
+	                    </em> -->
+						<div class="dialog-content" ng-attr-mid="{{item.id}}" ng-attr-type="{{item.type}}" ng-attr-tid="{{item.to.id}}" ng-attr-tm="{{item.dateline}}">
+							<div class="msg-read" ng-if="item.sendState=='readed'">已读</div>
+							<div class="msg-unread" ng-if="item.sendState=='unreaded'">未读</div>
+							<!-- {{item.templateCode}} -->
+							<pre ng-if="item.templateCode == 2 && !item.business" ng-bind-html="item.data.content| expressionFilter" style=""></pre>
+							<pre ng-if="item.templateCode == 2 && item.business">
+	                        	<a href="{{item.data.content.businessDetailUrl}}" ng-bind-html="item.data.content.messageText" target="_self"></a>
+	                        </pre>
+
+							<pre ng-if="item.templateCode == 1024" ng-bind-html="item.data.content.text| expressionFilter" ng-click="listenToWhiteBorad(item.data.content,$event)" style="cursor: pointer;"></pre>
+
+							<img ng-if="item.templateCode == 8" ng-src="{{item.data.content.path}}" style="max-height: 260px;" class="chat-img">
+							<!-- <img ng-if="item.templateCode == 128" ng-src="{{item.data.content.path}}" class="chat-img"> -->
+							<pre ng-if="item.templateCode == 128" ng-bind-html="'当前版本暂不支持查看此位置消息，请使用移动端打开'" style=""></pre>
+							<!-- <vi ng-if="item.templateCode == 10" path="item.data.content.path"></vi> -->
+							<!-- <videogular ng-if="item.templateCode == 10" >
+								<vg-media vg-src="sources.src"
+										  vg-native-controls="true">
+								</vg-media>
+							</videogular> -->
+							<pre ng-if="item.templateCode == 10" ng-bind-html="'当前版本暂不支持查看此视频消息，请使用移动端打开'" style=""></pre>
+							<!-- <video ng-if="item.templateCode == 10" controls="controls">
+								<source src="{{item.data.content.path}}" type="video/mp4">
+							</video> -->
+							<span ng-if="item.templateCode == 4"><img class="file-icon" ng-src="src/style/images/filetype/{{item.data.content.type}}.png" onerror="this.src='src/style/images/filetype/file_default.jpg'">
+								<a href="{{item.data.content.path}}"  download="{{item.data.content.name}}">{{item.data.content.name}}</a></span>
+							<pre ng-if="item.templateCode == 64" ng-bind-html="'当前版本暂不支持查看此语音消息，请使用移动端打开'"></pre>
+
+						</div>
+					</div>
+				</div>
+				<!--撤回的消息-->
+				<div class="cl" ng-class="{true:'z',false:'y'}[item.received==true]" ng-if="!!item.revocation && item.received==true" id="{{item.id}}" style="text-align: center;position: relative;margin: 0 auto;display: block;float: none;">
+						{{item.revocation.name}}撤回了一条消息
+			     </div>
+
+			     <div class="cl" ng-class="{true:'z',false:'y'}[item.received==false]" ng-if="!!item.revocation && item.received==false" id="{{item.id}}" style="text-align: center;position: relative;margin: 0 auto;display: block;float: none;">
+						您撤回了一条消息
+			     </div>
+
+				<!--群聊-->
+				<div class="cl" ng-class="{true:'z',false:'y'}[item.received==true]" ng-if="item.type=='groupchat' && !item.revocation" id="{{item.id}}">
+					<span ng-click="checkRosterInfo(item.fromRoster.id,item)"
+						class="photocard  avt-s-l"
+						ng-class="{true:'z',false:'y'}[item.received==true]"
+						ng-if="item.received==true  && !item.business">
+						<headerphoto item="item"></headerphoto>
+						<!-- <img width="40" ng-click="test(item)" height="40" err-src="./src/style/css/images/default_photo.jpg"  ng-src="{{!item.fromRoster.vcard.avatar||item.fromRoster.vcard.avatar==''?'./src/style/css/images/default_photo.jpg':item.fromRoster.vcard.avatar}}"/> -->
+					</span>
+					<span  class="photocard {{item.data.content.businessType.key}} avt-s-l" ng-class="{true:'z',false:'y'}[item.received==true]" ng-if="item.received==true && !!item.business" ng-bind="item.data.content.businessType.value | cutString:1:2"></span>
+
+					<span ng-click="showUserInfo()"
+						class="photocard  avt-s-l"
+						ng-class="{true:'y',false:'z'}[item.received==false]"
+						ng-if="item.received==false  && !item.business"
+						>
+						<headerphoto item="item"></headerphoto>
+						<!-- <img width="40" height="40" err-src="./src/style/css/images/default_photo.jpg"  ng-src="{{!item.fromRoster.vcard.avatar||item.fromRoster.vcard.avatar==''?'./src/style/css/images/default_photo.jpg':item.fromRoster.vcard.avatar}}"/> -->
+					</span>
+					<span class="photocard {{item.data.content.businessType.key}} avt-s-l" ng-class="{true:'y',false:'z'}[item.received==false]" ng-if="item.received==false && !!item.business" ng-bind="item.data.content.businessType.value | cutString:1:2"></span>
+
+					<div class="dialog-card" ng-if="item.received==true">
+						<div class="namecard" ng-if="!item.business" ng-bind="item.fromRoster.name">
+						</div>
+
+						<div class="namecard" ng-if="!!item.business"  ng-bind="item.data.content.businessName">
+						</div>
+						<div class="dialog-content" ng-attr-mid="{{item.id}}" ng-attr-type="{{item.type}}" ng-attr-tid="{{item.from.id}}" ng-attr-tm="{{item.dateline}}">
+							<div ng-if="item.templateCode == 2 && !item.business" ng-bind-html="item.data| atMsgFilter"></div>
+							<pre ng-if="item.templateCode == 2 && item.business">
+	                        	<a href="{{item.data.content.businessDetailUrl}}" ng-bind-html="item.data.content.messageText" target="_self"></a>
+	                        </pre>
+							<pre ng-if="item.templateCode == 1024" ng-bind-html="item.data.content.text| expressionFilter" ng-click="listenToWhiteBorad(item.data.content,$event)" style="cursor: pointer;"></pre>
+
+							<img ng-if="item.templateCode == 8" ng-src="{{item.data.content.path}}" style="max-height: 260px;" class="chat-img">
+							<!-- <vi ng-if="item.templateCode == 10" ng-src="{{item.data.content.path}}" class="chat-img"> -->
+							<!-- <vi ng-if="item.templateCode == 10" path="item.data.content.path"></vi> -->
+							<!-- <img ng-if="item.templateCode == 128" ng-src="{{item.data.content.path}}" class="chat-img"> -->
+							<pre ng-if="item.templateCode == 128" ng-bind-html="'当前版本暂不支持查看此位置消息，请使用移动端打开'" style=""></pre>
+
+							<pre ng-if="item.templateCode == 10" ng-bind-html="'当前版本暂不支持查看此视频消息，请使用移动端打开'" style=""></pre>
+							<span ng-if="item.templateCode == 4"><img class="file-icon" ng-src="src/style/images/filetype/{{item.data.content.type}}.png" onerror="this.src='src/style/images/filetype/file_default.jpg'">
+								<a href="{{item.data.content.path}}" noopen="true"  imopenurl download="{{item.data.content.name}}"   target="_top">{{item.data.content.name}}</a></span>
+							<span ng-if="item.templateCode == 64">当前版本暂不支持查看此语音消息，请使用移动端打开</span>
+						</div>
+					</div>
+
+					<div class="dialog-card" ng-if="item.received==false">
+						<div class="namecard" ng-bind="item.fromRoster.name">
+							{{item.fromRoster.name}}
+						</div>
+
+						<!-- <em class="arrow">
+	                    	<span></span>
+	                    	<span></span>
+	                    </em> -->
+						<div class="dialog-content" ng-attr-mid="{{item.id}}" ng-attr-type="{{item.type}}" ng-attr-tid="{{item.from.id}}" ng-attr-tm="{{item.dateline}}">
+							<pre ng-if="item.templateCode == 2 && !item.business" ng-bind-html="item.data.content| expressionFilter"></pre>
+							<pre ng-if="item.templateCode == 2 && item.business">
+	                        	<a href="{{item.data.content.businessDetailUrl}}" ng-bind-html="item.data.content.messageText" target="_self"></a>
+	                        </pre>
+
+							<pre ng-if="item.templateCode == 1024" ng-bind-html="item.data.content.text| expressionFilter" ng-click="listenToWhiteBorad(item.data.content,$event)" style="cursor: pointer;"></pre>
+							<!-- <vi ng-if="item.templateCode == 10" path="item.data.content.path"></vi> -->
+
+							<!-- <img ng-if="item.templateCode == 128" ng-src="{{item.data.content.path}}" class="chat-img"> -->
+							<pre ng-if="item.templateCode == 128" ng-bind-html="'当前版本暂不支持查看此位置消息，请使用移动端打开'" style=""></pre>
+
+							<pre ng-if="item.templateCode == 10" ng-bind-html="'当前版本暂不支持查看此视频消息，请使用移动端打开'" style="color:#fff;"></pre>
+							<img ng-if="item.templateCode == 8" style="max-height: 260px;" ng-src="{{item.data.content.path}}" class="chat-img">
+							<span ng-if="item.templateCode == 4"><img class="file-icon" ng-src="src/style/images/filetype/{{item.data.content.type}}.png" onerror="this.src='src/style/images/filetype/file_default.jpg'">
+								<a href="{{item.data.content.path}}"  noopen="true"  imopenurl download="{{item.data.content.name}}"  target="_top">{{item.data.content.name}}</a></span>
+
+							<span ng-if="item.templateCode == 64" style="color:#fff;">当前版本暂不支持查看此语音消息，请使用移动端打开</span>
+						</div>
+					</div>
+				</div>
+
+				<div ng-if="item.type=='photoItemWhichFromSelf' && item.sendingstatus">
+					<div class="cl ng-scope y">
+						<span class="photocard  avt-s-l y">
+						<!-- <img width="40" height="40" err-src="./src/style/css/images/default_photo.jpg" ng-src="item.avaster"> -->
+						<headerphoto item="item"></headerphoto>
+						</span>
+						<div class="dialog-card ng-scope">
+							<div class="namecard" ng-bind="item.sendername"></div>
+							<div class="dialog-content" ng-click='loadFile(item)'>
+								<div style="display:table;width:190px;table-layout:fixed">
+									<div style="display:table-cell;vertical-align:top;padding-left:6px;" >
+										<div class="esn-three-bounce" style="position:relative; background: rgba(0,0,0,0);">
+											<div class="esn-child esn-bounce1"></div>
+											<div class="esn-child esn-bounce2"></div>
+											<div class="esn-child esn-bounce3"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div ng-bind="item.sendingstatus"></div>
+						</div>
+					</div>
+				</div>
+				<div ng-if="item.type=='fileItemWhichFromSelf' && item.sendingstatus">
+					<div class="cl ng-scope y">
+						<span class="photocard  avt-s-l y">
+						<!-- <img width="40" height="40" err-src="./src/style/css/images/default_photo.jpg" ng-src="item.avaster"> -->
+						<headerphoto item="item"></headerphoto>
+					</span>
+					<div class="dialog-card ng-scope">
+						<div class="namecard" ng-bind="item.sendername"></div>
+						<div class="dialog-content" ng-click='loadFile(item)'>
+							<div style="display:table;width:190px;table-layout:fixed">
+								<div style="display:table-cell;width:50px;vertical-align:middle">
+									<img style="width:50px;" ng-src="{{item.fileimage}}" err-src="./src/style/css/images/filetype/other@2x.png"/>
+								</div>
+								<div style="display:table-cell;vertical-align:top;padding-left:6px;" >
+									<div ng-bind="item.filename" style="color:#ffffff;"></div>
+									<div ng-bind="item.filesize" style="color:#ffffff;"></div>
+								</div>
+							</div>
+						</div>
+						<div ng-bind="item.sendingstatus"></div>
+					</div>
+				</div>
+
+
+
+				</div>
+				 <!--公众号消息-->
+        <div class="cl" ng-class="{true:'z',false:'y'}[item.received==true]" ng-if="item.type=='pubaccount' && item.from.noticyType!=undefined">
+              <!-- <span  class="photocard rainbow-{{'消息'|getFirstLetter}} avt-s-l" style="font-size:22px;color:#fff;background-color:#{{headercolor}}" ng-class="{true:'z',false:'y'}[item.received==true]"  ng-if="!item.business"></span> -->
+							<headerphoto item="item" ng-if="!item.business"></headerphoto>
+              <span  class="photocard {{item.data.content.businessType.key }} avt-s-l" ng-class="{true:'z',false:'y'}[item.received==true]"  ng-bind="item.data.content.businessType.value" ng-if="item.business"></span>
+              <div class="dialog-card notice">
+                <div class="namecard notice" ng-if="!item.business && (item.data.extend.esndata.type_detail!='vmail_new' && item.data.extend.esndata.type_detail!='vmail_reply' && item.from.noticyType != 'feed')" ng-bind="item.data.extend.esndata.title"></div>
+								<div class="namecard notice" ng-if="!item.business && (item.data.extend.esndata.type_detail=='vmail_new' || item.data.extend.esndata.type_detail=='vmail_reply' || item.from.noticyType == 'feed')" ng-bind="analysisVmailTitle(item)"></div>
+								<div class="namecard notice" ng-if="item.business"  ng-bind="item.data.content.businessName">
+								</div>
+                <div class="dialog-content notice">
+                	<div class="msg-read" ng-if="item.sendState=='readed'">已读</div>
+                	<div class="msg-unread" ng-if="item.sendState=='unreaded'">未读</div>
+
+                    <pre ng-if="item.templateCode == 2 && !item.business" ng-bind-html="analysisHtml(item)| expressionFilter"></pre>
+                    <pre ng-if="item.templateCode == 2 && item.business">
+                    	<a href="{{item.data.content.businessDetailUrl}}" ng-bind-html="item.data.content.messageText| expressionFilter" target="_self"></a>
+                    </pre>
+                    <pre ng-if="item.templateCode == 1024" ng-bind-html="item.data.content.text| expressionFilter" ng-click="listenToWhiteBorad(item.data.content,$event)" style="cursor: pointer;"></pre>
+
+
+                    <img ng-if="item.templateCode == 8" style="max-height: 260px;" ng-src="{{item.data.content.path}}" class="chat-img">
+                    <span ng-if="item.templateCode == 4"><img class="file-icon" ng-src="src/style/images/filetype/{{item.data.content.type}}.png" onerror="this.src='src/style/images/filetype/file_default.jpg'">
+											<a href="{{item.data.content.path}}" noopen="true"  imopenurl download="{{item.data.content.name}}" target="_top">{{item.data.content.name}}</a></span>
+
+                    <!-- 单图文 -->
+                    <pre ng-if="item.templateCode == 16"  ng-bind-html="item.data.content.title"></pre>
+                    <img ng-if="item.templateCode == 16" ng-src="{{getfileurl(item.data.content.thumbId)}}"  ng-click="openmicroApp(item.data.content.contentSourceUrl,$event)"  class="chat-pub-img">
+										<div ng-if="item.templateCode == 16"  ng-bind-html="item.data.content.digest"></div>
+
+                    <!-- 多图文 -->
+                    <pre ng-if="item.templateCode == 32"  ng-bind-html="item.data.content.title" ></pre>
+                    <img ng-if="item.templateCode == 32" ng-click="openmicroApp(item.data.content.contentSourceUrl,$event)"  ng-src="{{getfileurl(item.data.content.thumbId)}}" class="chat-pub-img">
+										<div class="view_details" ng-if="item.data.extend.esndata.type_detail == 'qz_apply_new' || item.data.extend.esndata.type_detail == 'group_admin_join' || item.data.extend.esndata.type_detail == 'group_invite_apply' || item.from.noticyType == 'vmail' || item.from.noticyType =='feed' || (item.from.noticyType =='app' && item.data.extend.esndata.type_detail!='calendar_share_refuse')">
+											<span class="details_txt" ng-click="viewDetails_Click(item)">查看详情</span>
+										</div>
+								</div>
+              </div>
+          </div>
+
+					<!--订阅号消息-->
+					<div class="cl"  ng-if="item.type=='pubaccount' && item.from.noticyType==undefined">
+								<span  class="photocard {{item.data.content.businessType.key }} avt-s-l" ng-class="{true:'z',false:'y'}[item.received==true]"  ng-bind="item.data.content.businessType.value" ng-if="item.business"></span>
+								<div class="dialog-card notice sub">
+									<div class="dialog-content sub notice">
+										<div class="msg-read" ng-if="item.sendState=='readed'">已读</div>
+										<div class="msg-unread" ng-if="item.sendState=='unreaded'">未读</div>
+
+											<pre ng-if="item.templateCode == 2 && !item.business" ng-bind-html="item.data.content"></pre>
+											<pre ng-if="item.templateCode == 2 && item.business">
+												<a href="{{item.data.content.businessDetailUrl}}" ng-bind-html="item.data.content" target="_self"></a>
+											</pre>
+											<pre ng-if="item.templateCode == 1024" ng-bind-html="item.data.content| expressionFilter" ng-click="listenToWhiteBorad(item.data.content,$event)" style="cursor: pointer;"></pre>
+
+
+											<img ng-if="item.templateCode == 8" ng-src="{{item.data.content.path}}" class="chat-img" style="max-height: 260px;width:100%;">
+											<span ng-if="item.templateCode == 4"><img class="file-icon" ng-src="src/style/images/filetype/{{item.data.content.type}}.png" onerror="this.src='src/style/images/filetype/file_default.jpg'">
+												<a href="{{item.data.content.path}}" noopen="true"  imopenurl download="{{item.data.content.name}}" target="_top">{{item.data.content.name}}</a></span>
+
+											<!-- 单图文 -->
+											<pre ng-if="item.templateCode == 16"  ng-bind-html="item.data.content.title"></pre>
+											<img  ng-if="item.templateCode == 16" style="width:100%;" ng-src="{{getfileurl(item.data.content.thumbId)}}"  ng-click="openmicroApp(item.data.content.contentSourceUrl,$event)"  class="chat-pub-img">
+											<pre ng-if="item.templateCode == 16"  ng-bind-html="item.data.content.digest"></pre>
+
+											<!-- 多图文 -->
+											<newsview ng-if="item.templateCode == 32" item="item"></newsview>
+											<pre ng-if="item.templateCode == 32"  ng-bind-html="item.title" ></pre>
+											<img ng-if="item.templateCode == 32" ng-click="openmicroApp(item.contentSourceUrl,$event)"  ng-src="{{getfileurl(item.thumbId)}}" class="chat-pub-img">
+											<div class="view_details" ng-if="item.templateCode != 32 && (item.data.extend.esndata.detail_url || item.templateCode != 2)">
+												<span class="details_txt" ng-click="viewDetails_Click(item)">查看详情</span>
+											</div>
+									</div>
+								</div>
+						</div>
+			</li>
+
+
+		</ul>
+		<!-- 联系人实体 -->
+	</div>
+</div>
+<div style=" position: fixed;
+    left: 0;
+    right: 0;
+    top: -11px;
+    bottom: 0;
+    background: transparent;
+    z-index: 20;" ng-if="expressionShow.show" ng-click='hideEmojiPanel()'></div>
+	<!-- IMChat 富文本框 -->
+<!-- <button id="check_latest" ng-show="latest_btn.show" ng-click="checkLatest();">新消息</button> -->
+<div class="IMChat-richTextBox cl" ng-if="chatiteminfo.type!='pubaccount'" ng-show="!loadMenu">
+	<div class="IMChat-as-center">
+		<!-- 发送按钮 -->
+		<button class="IMChat-send-btn y" disabled="true" ng-click="sendMessage()">
+		</button>
+		<div class="IMChat-editBox">
+			<div class="expression-pannel" id="expression-pannel" ng-if="expressionShow.show">
+				<ul>
+					<li ng-repeat="exp in exps.data"><a class='emoji-a' ng-mousedown="addFace($index,$event)"><img ng-src="{{exps.folder}}{{exp.url}}" /></a></li>
+				</ul>
+			</div>
+			<!-- 编辑工具 -->
+			<input id="file_upload_input" accept="image/*" ng-model="filename.file" onchange="angular.element(this).scope().sendpicFile(this)" style="visibility:hidden; height:1px;width:1px;" type="file">
+			<input id="file_upload_inputfile" ng-model="filename.file" onchange="angular.element(this).scope().sendFile(this)" style="visibility:hidden; height:1px;width:1px;" type="file">
+			<ul class="edit-toolsbar">
+
+				<li title="表情">
+					<a href='#' style='position:relative;display:block;width:100%;height:100%;text-decoration:none' ng-click="showEmojiPanel($event)">
+						<div class='em-yim-win-toolbar-icon icon-web_icon_expression'></div>
+					</a>
+				</li>
+				<li  title="文件" onclick="jQuery('#file_upload_inputfile').trigger('click')">
+							<div class='em-yim-win-toolbar-icon icon-web_icon_sent_document'></div>
+				</li>
+				<li  title="图片" onclick="jQuery('#file_upload_input').trigger('click')">
+						<div class='em-yim-win-toolbar-icon icon-web_icon_picture'></div>
+				</li>
+				<li title="@" ng-click="atSomeOne($event)" ng-if="chatiteminfo.type=='groupchat'">
+					<div class='em-yim-win-toolbar-icon icon-web_icon_a-tail'></div>
+				</li>
+
+				<li title="截屏" ng-click="screenCut()">
+					<div class='em-yim-win-toolbar-icon icon-web_icon_screenshot'></div>
+				</li>
+
+
+				<!--<li class="mobile-tool" title="电话会议" ng-click="multiPartyCall($event,entity.vcard.mobile)" ng-if="chatiteminfo.type=='chat'"></li>
+				<li class="whiteboard-tool" ng-click="openWhiteBoard($event)"></li>-->
+				<!-- <li class="screenshot-tool relative"title="截屏"  id="captureBtn" ng-if="install.isinstall&&iswin" ng-click="capturepic()" title="按shift可显示桌面端,ctrl+alt+x 快捷键截屏">
+				</li> -->
+				<!-- <li class="screenshot-tool relative" title="截屏"  ng-click="screenCut()" style="width:20px;height:20px;background-repeat: no-repeat">
+				</li> -->
+			</ul>
+			<!-- 文字编辑区 -->
+			<div class="textedit-box-container relative">
+				<span id="textedit-box-hide"><span class="cont"></span><span class="cursor"></span></span>
+				<textarea class="textedit-box" maxlength="1000" ng-keypress="presskey($event)" ng-keyup="handleInputMsg($event);" ng-change="handleInputMsg($event);" ng-keydown="keyDown($event)" ng-blur='imTextAreaBlur($event)' ng-click="handleClick($event)" ng-model="EditBox.content" id="IMChat_msg_cont">
+				</textarea>
+				<div ng-include="'src/modules/yxim/template/entity-list.htm'"></div>
+			</div>
+		</div>
+	</div>
+</div>

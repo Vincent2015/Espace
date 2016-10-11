@@ -1,0 +1,48 @@
+<div class="esn-right-container ">
+  <div class="content-head">
+    <span>我的关注</span>
+    <span style="position:absolute;right:20px;color:#007ddc; cursor: pointer;display:none;" ng-click="followgroup()">管理分组</span>
+  </div>
+  <div class="content-body">
+    <div ng-if="!FollowGroup || FollowGroup.length == 0" style="text-align: -webkit-center;padding: 8px;">
+      暂无分组
+    </div>
+    <followgroup></followgroup>
+  </div>
+</div>
+
+
+
+
+
+<script type='text/ng-template' id='followgroup.html'>
+      <div ng-repeat="each in FollowGroup"  ng-if='qz_user_type == 1 || qz_user_type ==0'  >
+          <div class="line-divide-wrapper" ng-click="toggleDisplayClass($event)">
+            <div class="table-cell">{{each.name}}</div>
+            <div class="table-cell ">
+            <div class="triangle triangle-down">
+            </div>
+            </div>
+          </div>
+
+          <div class="content-group-wrapper">
+            <div ng-if="!each.dataList.data.length || each.dataList.data.length == 0" style="text-align: -webkit-center;padding: 8px;">
+              暂无关注联系人
+            </div>
+            <div class="group-wrapper">
+              <div class="float-item-org" ng-if='qz_user_type == 1 || qz_user_type ==0'  ng-repeat="follow in each.dataList.data"  ng-click="userCard(follow.id,follow)">
+                  <div class="content-cell" style="width:52px">
+              			<headerphoto item="follow"></headerphoto>
+                    <!-- <img class="headImg" ng-src="{{follow.avatar}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+                  </div>
+                  <div class="content-cell">
+                    <div class="people-name">{{follow.name}}</div>
+                    <div class="people-duty" ng-if="follow.mp_duty">{{follow.mp_duty}}</div>
+                    <div class="people-duty" ng-if="!follow.mp_duty">&nbsp;</div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+      </div>
+</script>

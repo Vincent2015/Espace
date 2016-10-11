@@ -1,0 +1,27 @@
+<div class='es-im-win-wrapper'>
+<div class='es-im-win-header'><div class='es-im-win-title-wrapper'>
+  <span ng-bind='winInfo.name'></span>
+</div>
+<div class='es-im-win-header-right'>
+  <div style='padding-top:1px;' class="es-im-win-header-icon icon-web_icon_file"></div>
+  <div style='font-size:25px;padding-top:1px;' class="es-im-win-header-icon icon-web_icon_dudu_normal"></div>
+  <div class="es-im-win-header-icon icon-web_icon_adduser"></div>
+  <div style='font-size:25px' class="es-im-win-header-icon icon-web_icon_history" ng-click='setGroup()'>
+    <!-- <div style='font-size:25px' class="es-im-win-header-icon icon-web_icon_history" ng-click='setGroup()'> -->
+</div>
+</div>
+</div>
+<im-emoji></im-emoji>
+<div class='es-im-win-body'>
+  <im-list></im-list>
+</div>
+<div class='es-im-win-footer'>
+  <div class='em-im-win-footer-left'>
+    <im-toolbar show-at='false'></im-toolbar>
+    <div class='em-im-win-textarea'>
+      <im-textarea/>
+    </div>
+  </div>
+  <im-sendbtn/>
+</div>
+</div>

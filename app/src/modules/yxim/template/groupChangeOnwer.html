@@ -1,0 +1,28 @@
+<div id="groupChangeOnwer" ng-click='stopPop($event)'>
+    <header>
+          <span class="esn-card-close" ng-click='closeDialog()'>+</span>
+    选择新群主
+    </header>
+    <section>
+        <div class="esn-grpset-chgonwer esn-grpset-chgonwer-active">
+            <input type="text" placeholder="搜索" ng-keyup='' ng-model="search_keyword_g" ng-focus='inputfocus($event)'/>
+        </div>
+        <div class="esn-grpset-content">
+          <div class='esn-grpset-member-item' ng-repeat='item in member' ng-click='checkMember(item.id,item)'>
+              <div class='esn-grpset-member-logo' style="border:none;">
+                <!-- <img ng-src='{{item.vcard.avatar}}'/> -->
+          			<headerphoto item="item"></headerphoto>
+              </div>
+              <div class='esn-grpset-member-text' ng-bind='item.name'></div>
+              <div class='esn-grpset-member-dash' ng-show='item.checked'></div>
+          </div>
+
+        </div>
+
+    </section>
+    <footer>
+        <div class='esn-grpset-btn esn-grpset-cancle' ng-click='closeDialog()'>取消</div>
+        <div class='esn-grpset-btn esn-grpset-ok' ng-click='confirmChecked()'>确定</div>
+    </footer>
+
+</div>

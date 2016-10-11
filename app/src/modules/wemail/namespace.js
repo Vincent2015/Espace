@@ -1,0 +1,5 @@
+define([
+  "./IMChat.WeMail"
+  ], function () {
+
+});

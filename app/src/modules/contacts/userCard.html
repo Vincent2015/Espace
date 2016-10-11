@@ -1,0 +1,62 @@
+<div id="usercard" ng-controller="contactController">
+      <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()">
+              ×
+          </span>
+          <div class="usericon" style="text-align:center;">
+              <!-- <img ng-if="!userItem" ng-src="{{userCardinfo.avatar}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+              <headerphoto ng-if="!userItem" info="userCardinfo" size="76"></headerphoto>
+              <headerphoto ng-if="userItem && !userCardinfo" item="userItem" size="76"></headerphoto>
+              <headerphoto ng-if="userItem && userCardinfo" info="userCardinfo" size="76"></headerphoto>
+              <span ng-if="!userItem">{{userCardinfo.name}}</span>
+              <span ng-if="userItem&&userItem.fromRoster">{{userItem.fromRoster.name}}</span>
+              <span ng-if="userItem&&!userItem.fromRoster">{{userItem.from.name}}</span>
+              <span ng-if="userItem&&!userItem.fromRoster&&!userItem.from">{{userItem.name}}</span>
+          </div>
+          <!-- follow_status==4  未关注 , 1 已关注 2 互相关注 3对方关注我  -->
+          <span class="followme" ng-show="userCardinfo.isNotSelf" ng-click="followtog(userCardinfo.member_id,userCardinfo.follow_status)" ng-if='userCardinfo.follow_status==4|| userCardinfo.follow_status==3'>
+              ＋&nbsp;关注
+          </span>
+          <span class="followme" ng-show="userCardinfo.isNotSelf" ng-click="followtog(userCardinfo.member_id,userCardinfo.follow_status)" ng-if='userCardinfo.follow_status==1 || userCardinfo.follow_status==2'>
+              取消关注
+          </span>
+
+
+      </header>
+       <section>
+           <ul>
+               <li>
+                   <label>手机</label>
+                   <span class='esn-usecard-item' ng-if="userCardinfo.mobile">{{userCardinfo.mobile}}</span>
+                   <span class='esn-usecard-item' ng-if="!userCardinfo.mobile">无</span>
+               </li>
+               <li>
+                   <label>邮箱</label>
+                   <span class='esn-usecard-item' ng-if="userCardinfo.email">{{userCardinfo.email}}</span>
+                   <span class='esn-usecard-item' ng-if="!userCardinfo.email">无</span>
+               </li>
+                 <li>
+                   <label>部门</label>
+                   <span class='esn-usecard-item' ng-if="userCardinfo.dept_name">{{userCardinfo.dept_name}}</span>
+                   <span class='esn-usecard-item' ng-if="!userCardinfo.dept_name">无</span>
+               </li>
+                 <li>
+                   <label>职位</label>
+                   <span class='esn-usecard-item' ng-if="userCardinfo.duty">{{userCardinfo.duty}}</span>
+                   <span class='esn-usecard-item' ng-if="!userCardinfo.duty">无</span>
+               </li>
+           </ul>
+
+       </section>
+       <footer ng-show="userCardinfo.isNotSelf">
+           <span class="esn-usecard-foot-span icon-mail icon-web_icon_message_dynamic" ng-click="go2msg(userCardinfo)">
+             发消息
+           </span>
+           <span class="esn-usecard-foot-span icon-toggle icon-web_icon_dudu" ng-click="go2dudu(userCardinfo.member_id)">
+               嘟嘟
+           </span>
+           <span class="esn-usecard-foot-span icon-eye icon-web_icon_mail_selected" ng-click="go2weimail(userCardinfo.member_id)">
+               微邮
+           </span>
+       </footer>
+</div>

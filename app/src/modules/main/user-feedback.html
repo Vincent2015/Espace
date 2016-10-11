@@ -1,0 +1,28 @@
+<div class='esn-main-aboutUs'>
+      <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()"><span style="color: white;position: relative;top: -1px;">+</span></span>
+          <div class="title">
+              反馈
+          </div>
+      </header>
+       <div>
+          <div class="esn-feed-text">
+            感谢您在百忙之中给我们提供宝贵的反馈意见,我们将会尽快回复您。
+          </div>
+
+          <div class="esn-feed-textarea">
+            <textarea placeholder="请输入您的反馈详情" ng-model="feed_content" ng-keyup="FeedModule.handleInputMsg($event);">
+
+            </textarea>
+            <span class="esn-feed-limit">{{feed_content.length || 500}}字</span>
+          </div>
+
+       </div>
+
+       <div class="esn-feed-foot">
+
+         <button class="esn-btn-cancel"   ng-click="FeedModule.cancel();">取消</button>
+         <button class="esn-btn-sure"   ng-click="FeedModule.post();">确定</button>
+
+       </div>
+</div>

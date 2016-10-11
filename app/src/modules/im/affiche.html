@@ -1,0 +1,54 @@
+<div class='es-im-win-wrapper'>
+  <div ng-click="hideDetailPanel()" class='im-affiche-detail-bk' ng-if='isShowDetailPanel'></div>
+  <div class='im-affiche-detail-panel {{isShowDetailPanel?"detail-panel-show":""}}'>
+    <div class='im-affiche-detail-inner'>
+      <div class='es-im-win-header'>
+        <div class='ds-cell im-affiche-close'></div>
+        <div class='ds-cell im-affiche-header-title'><span>公告详情</span></div>
+      </div>
+      <div class='es-im-affich-body' style="bottom:36px;">
+        <div ng-bind='curAffich.title' class='im-affiche-title'></div>
+        <div class='im-affiche-name-time'><span ng-bind='curAffich.name'></span><span ng-bind='curAffich.time'></span></div>
+        <div class='im-affiche-content' ng-bind-html="curAffich.msg|to_trusted"></div>
+
+        <div class='im-affiche-reply-title'>回复(<span>0</span>)</div>
+      </div>
+      <div class='es-im-affich-input' ng-click='showReplyPanel()'><div>填写评论...</div></div>
+      <div class='affich-reply-bk' ng-click='hideReplyPanel()' ng-if='isShowReplyPanel'></div>
+      <div class='affich-reply-wrapper {{isShowReplyPanel?"affich-reply-wrapper-show":""}}'>
+        <div class='affich-reply-title'>评论<span>发送</span></div>
+        <div contenteditable="true" style="overflow-y:auto;width:100%;height:180px;outline:none"></div>
+        <div class='affich-emoji-wrapper'>
+          <div class='em-im-win-toolbar-icon icon-web_icon_picture'></div>
+          <div class='em-im-win-toolbar-icon icon-web_icon_a-tail'></div>
+          <a href='#'>
+            <div class='em-im-win-toolbar-icon icon-web_icon_expression'></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class='es-im-win-header'><div class='es-im-win-title-wrapper'>
+  <span ng-bind='winInfo.name'></span>
+</div>
+<div class='es-im-win-header-right'>
+</div>
+</div>
+<div class='es-im-affich-body'>
+  <div ng-repeat="item in afficheList" style="margin-top:20px">
+    <!-- <div class='em-im-list-sendtime' ng-bind='item.formatsendtime'></div> -->
+    <div class='em-im-chat-item'>
+      <div class='em-im-list-tx' style="padding-top:0">
+        <img draggable="false" ng-src={{item.avatar}}>
+      </div>
+      <div class='em-im-list-content' style="padding-top:5px">
+        <div class='em-im-list-mes im-arrow-left'>
+          <div  ng-bind-html="item.title|to_trusted"></div>
+          <div  ng-bind-html="item.msg|to_trusted"></div>
+          <div class='im-affiche-detail-btn' ng-click="showDetailPanel(item)">查看详情</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

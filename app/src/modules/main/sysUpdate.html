@@ -1,0 +1,24 @@
+<div class='esn-main-aboutUs'>
+      <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()">+</span>
+          <div class="title">
+              升级提醒
+          </div>
+      </header>
+       <section>
+          <div>
+            {{ngDialogData.data.desc}}
+          </div>
+
+
+       </section>
+
+       <footer>
+         <div class="btn-charge"  style="{{update_style}}" ng-click="update()">
+             {{update_text}}
+         </div>
+       </footer>
+       <div class="esn-progress-count" ng-if="isLoding">
+         <div class="esn-progress"></div>
+       </div>
+</div>

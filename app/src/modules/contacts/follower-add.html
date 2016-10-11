@@ -1,0 +1,75 @@
+<div id="followgroup">
+    <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()">
+              ×
+          </span>
+      全部关注 {{$parent.unfollowData.length}}
+    </header>
+    <section>
+        <div class="esn-follow-add-search active">
+            <input type="text" placeholder="搜索" ng-keyup='searchFollowMember($event)'/>
+        </div>
+        <div class="esn-follow-add-content">
+              <div class="esn-follow-add-items" >
+                  <div class="esn-follow-add-item" ng-repeat="each in $parent.unfollowData">
+                      <div class="esn-follow-add-checkboxs">
+                          <!-- <input type="checkbox" value="{{each.member_id}}" ng-click='addFollowerMember({id:each.member_id,logo:each.avatar})'/> -->
+                          <div class='esn-follow-add-checkbox' ng-click='addFollowerMember($event,{id:each.member_id,logo:each.avatar})'></div>
+                      </div>
+                      <div class="esn-follow-add-item-cell">
+                          <div class="item-cell-head">
+                            <img src="{{each.avatar}}" onerror="this.src='src/style/images/avt_default.png'"/>
+                          </div>
+                          <div class="item-cell">
+                            <div class="item-cell-name">{{each.name}}</div>
+                            <div class="item-cell-duty">{{each.mp_duty}}</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="esn-follow-add-letter">
+                  <li>A</li>
+                  <li>B</li>
+                  <li>C</li>
+                  <li>D</li>
+                  <li>E</li>
+                  <li>F</li>
+                  <li>G</li>
+                  <li>H</li>
+                  <li>I</li>
+                  <li>J</li>
+                  <li>K</li>
+                  <li>L</li>
+                  <li>M</li>
+                  <li>N</li>
+                  <li>O</li>
+                  <li>P</li>
+                  <li>Q</li>
+                  <li>R</li>
+                  <li>S</li>
+                  <li>T</li>
+                  <li>U</li>
+                  <li>V</li>
+                  <li>W</li>
+                  <li>X</li>
+                  <li>Y</li>
+                  <li>Z</li>
+              </div>
+        </div>
+
+    </section>
+    <footer>
+        <div class="esn-follow-add-footer">
+              <div class="esn-follow-add-choosen">
+                  <span ng-repeat="each in $parent.showImgDataArray">
+                      <img ng-if='each !="..." ' src="{{each.logo}}" onerror="this.src='src/style/images/avt_default.png'"/>
+                      <span ng-if='each =="..." '>...</span>
+                  </span>
+              </div>
+              <div class="esn-follow-add-choosenbtn" ng-click="addMember()">
+                  <div class="esn-follow-add-choosenbtn-ok">确定</div>
+              </div>
+        </div>
+    </footer>
+
+</div>

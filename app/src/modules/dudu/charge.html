@@ -1,0 +1,32 @@
+<div class="esn-right-dialog">
+
+  <div class="charge-head">
+
+    <span class="icon-web_icon_close charge-icon" ng-click="closeDiag()"></span>
+
+    <span>嘟嘟充值</span>
+  </div>
+
+  <div class="charge-input">
+    <div>
+      <input type="text" placeholder="请输入嘟嘟卡密码">
+    </div>
+    <div class="verify-input-table">
+      <div class="table-cell">
+        <input type="text" placeholder="请输入图形验证码" style="border-bottom: solid 1px transparent;">
+      </div>
+      <div class="table-cell-c table-cell-c-t" ng-click="Charge.updateVCode()">
+         换一张
+      </div>
+      <div class="table-cell-c" style="width:96px;">
+          验证码
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-charge" ng-click="Charge.charge()">
+     激活
+  </div>
+
+
+</div>

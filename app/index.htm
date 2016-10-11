@@ -1,0 +1,135 @@
+﻿<html>
+	<head>
+		<title>企业空间</title>
+
+		<style type="text/css">
+			[ng-cloak] {
+			         	display:none;
+			         }
+		</style>
+		<script type="text/javascript" src="./lib/jquery/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript">
+			window.NodeWebKitSupport = false;
+			if (typeof require != "undefined") {
+				if(!!require('nw.gui')){
+					window.NodeWebKitSupport = true;
+					var gui = require('nw.gui');
+					var newWin = null,
+					currentWin = null,
+					isConnected = true,
+					reloadTimer = null,
+					isLoadWindowOpen = false,
+					lastNetState = false;
+					gui.App.clearCache();
+				}
+			}
+
+		</script>
+
+
+		<!--add by liucyu 菜单按钮控制关闭最大化最小化 2016-06-14-->
+		<!-- <script  src="src/NWGuiHandler.js" type="text/javascript"></script> -->
+
+		<!-- <script  src="src/NWAU.js" type="text/javascript"></script> -->
+
+		<script  src="src/NWAU.js" type="text/javascript"></script>
+
+
+	</head>
+	<body style=" background: linear-gradient(40deg, #3aa6f6, #8cdfba);">
+
+		<!-- <button onclick="update()">升级测试</button> -->
+
+		<!--  消息模块依赖 -->
+	<!-- // <script src="message/lib/YYIMSDK.js" type="text/javascript"></script> -->
+    <!-- // <script src="message/cache/YYIMCache.js" type="text/javascript" charset="utf-8"></script> -->
+
+	<!-- // <script src="message/angular/lib/mixture.js" type="text/javascript"></script> -->
+	<!-- //  <script src="message/angular/lib/angular.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/angular-ui-router.min.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/expression/ExpressionData.js"></script> -->
+	<!-- // <script src="message/angular/lib/purl.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/angular-sanitize.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/angular-cookies.js" type="text/javascript"></script> -->
+	<!-- //  <script src="message/angular/lib/ngDialog.min.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/getFirstLetter.js"></script> -->
+	<!-- // <script src="message/angular/lib/infinite-scroll.js"></script> -->
+	<!-- // <script src="message/angular/lib/taffy-min.js" type="text/javascript"></script> -->
+
+
+	<!-- // <script src="message/angular/directive/openUrl.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/directive/imgError.js" type="text/javascript" charset="utf-8"></script> -->
+
+<!--
+	<script src="message/angular/service/IMChatUrl.Service.js" type="text/javascript"></script>
+	<script src="message/angular/service/IMChat.NWKeyService.js" type="text/javascript"></script>
+	<script src="message/angular/service/IMChat.AudioPlay.js" type="text/javascript"></script>
+	<script src="message/angular/service/IMChat.FileCaptureService.js" type="text/javascript"></script>
+	<script src="message/angular/service/IMChat.FileConvertService.js" type="text/javascript"></script>
+	<script src="message/angular/service/IMChat.UpdateService.js" type="text/javascript"></script>
+	<script src="message/angular/service/IMChat.ShortCutService.js"></script>
+	<script src="message/angular/service/CommonService.js"></script> -->
+
+<!--
+	<script src="message/angular/controller/IMChat.Controller.js" type="text/javascript"></script>
+	<script src="message/angular/controller/IMChat.GroupController.js" type="text/javascript"></script>
+	<script src="message/angular/controller/IMChat.groupSetupController.js" type="text/javascript"></script>
+	<script src="message/angular/controller/IMChat.FriendController.js" type="text/javascript"></script> -->
+
+
+
+    <!-- add by liucyu 2016-06-02 微邮控制器-->
+    <!-- // <script src="message/angular/controller/wemail/IMChat.WeMail.js" type="text/javascript"></script> -->
+
+	<!-- // <script src="message/angular/config/config.js" type="text/javascript"></script> -->
+	<!-- //  <script src="message/angular/app/app.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/plugin/IMChat.ThirdPlug.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/filter/filter.js" type="text/javascript"></script> -->
+
+	<!-- // <script src="message/angular/lib/ngStorage.min.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/angular-animate.min.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/toaster.min.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/Underscore.min.js" type="text/javascript"></script> -->
+	<!-- // <script src="message/angular/lib/angularui-select/select.min.js" type="text/javascript"></script> -->
+
+
+	<!-- //  <script src="message/lib/jquery.datetimepicker.full.min.js"></script> -->
+	<link href="./lib/jquery-datetimepick/jquery.datetimepicker.css" rel="stylesheet" type="text/css"/>
+
+	<link href="./lib/angularui-select/select.min.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/yxim/ngDialog.min.css" rel="stylesheet" type="text/css" />
+		<link href="src/style/css/yxim/Bootstrap.css" rel="stylesheet" type="text/css" />
+
+	<link href="src/style/css/yxim/homeindex.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/yxim/toaster.min.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/yxim/angular-image-cropper.min.css" rel="stylesheet" type="text/css" />
+    <link href="src/style/css/yxim/IMChatstyle.css" rel="stylesheet" type="text/css" />
+    <!--new style -->
+	<link href="src/style/css/icomoon.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/wemail.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/esn-main.css" rel="stylesheet" type="text/css" />
+    <link href="src/style/css/esn-login.css" rel="stylesheet" type="text/css" />
+    <link href="src/style/css/library-custom.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/global.css" rel="stylesheet" type="text/css" />
+
+	<link href="src/style/css/dudu/dudu.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/contacts/contacts.css" rel="stylesheet" type="text/css" />
+	<link href="src/style/css/organization/organization.css" rel="stylesheet" type="text/css" />
+
+	<!--<link rel="stylesheet" type="text/css" href="http://www.sucaihuo.com/jquery/css/common.css" />-->
+
+
+
+ 	<script src="./lib/requirejs/require.js" data-main="./src/main"></script>
+	 <script src="./lib/angular-image-cropper/ImageView.js"></script>
+	<!--<script src="./lib/angular-image-cropper/module.js"></script>
+	<script src="./lib/angular-image-cropper/directives/directive.js"></script> -->
+
+	<!-- 登录 -->
+
+<div ui-view></div>
+
+
+
+	</body>
+</html>

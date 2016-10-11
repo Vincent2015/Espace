@@ -1,0 +1,6 @@
+define([
+  "./loginController",
+  "./loginService"
+  ], function () {
+
+});

@@ -1,0 +1,27 @@
+<div class="esn-right-container " ng-init="init()">
+  <div class="content-head">
+    <span>我的团队</span>
+  </div>
+
+  <div class="content-body contact-teamlist" style="background:white">
+    <div class="sub-org" >
+      <div ng-if="!sub_organization" style="text-align: -webkit-center;padding: 8px;">
+        暂无团队
+      </div>
+      <div ng-repeat="each in sub_organization" class="table-wrapper"  ui-sref="main.contact.team({gid: each.gid,group_name:each.group_name})">
+        <div class="table-cell">
+          <headerphoto item="each"></headerphoto>
+          <lable class="teamlist-label"> {{each.group_name}}</lable>
+        </div>
+        <div class="table-cell" style="width:60px;text-align: right;padding-right: 12px;">
+            <span style="color:#B7C0C7">{{each.groupMemberCount}}</span>
+            <span class="icon-web_icon_goto" style="position:relative;top:1px"></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,92 @@
+<div class="esn-im-container-nav">
+  <div class='esn-im-container-nav-inner'>
+  <div class="esn-im-search">
+    <div class="icon-web_icon_search esn-c-search">
+      <input type="text" class="esn-input-search" placeholder="从联系人搜索" ng-keyup="keydown($event)"/>
+    </div>
+  </div>
+  <ul class="esn-im-c-ul" id="contact_1">
+    <li ng-repeat="item in contactList track by $index" class="esn-im-c-li esn-im-chatlist {{selectedId==item.id?'active':''}}" ng-click='itemClick(item)'>
+      <div class="esn-im-li-ico">
+        <img class="esn-li-icon icon-head"  ng-src={{item.avatar[0]}}></img>
+      </div>
+      <div class="esn-im-li-text">
+        <div class='esn-im-li-top'>
+          <div class='esn-im-li-name'><div ng-bind="item.name" class='esn-im-li-name-label'></div></div>
+          <div class='esn-im-li-time'></div>
+          <!-- ng-bind="formartImTime(item.sendtime)" -->
+        </div>
+
+        <div class='esn-im-li-msg' ng-bind="item.msg"></div>
+          <div class='esn-im-li-newmsgcount'  ng-if="item.newMsgCount">
+              <span  ng-bind="item.newMsgCount"></span>
+          </div>
+          <div class='esn-im-li-newmsgcount'  ng-if="item.newMsgCount>99">
+              <span style="top: 0px;font-size: 15px;font-weight: bold;">...</span>
+          </div>
+
+      </div>
+    </li>
+  </ul>
+  <ul class="esn-im-c-ul" id="contact_2" style="background:#FFFFFF;
+  overflow-y:auto;overflow-x: hidden;
+  position: absolute;
+  z-index: 1500;display:none;height: auto !important">
+    
+    <li ng-repeat="item in clist.contacts_list track by $index" class="esn-im-c-li esn-im-chatlist {{selectedId==item.uid?'active':''}}" ng-click='itemClickP(item)'>
+      <div class="esn-im-li-ico">
+        <img class="esn-li-icon icon-head"  ng-src={{item.other_avatar}}></img>
+      </div>
+      <div class="esn-im-li-text">
+        <div class='esn-im-li-top'>
+          <div class='esn-im-li-name'><div ng-bind="item.uname" class='esn-im-li-name-label'></div>
+<div class='esn-im-li-time-ex' ng-bind="item.company"></div>
+        </div>
+          
+          <!-- ng-bind="formartImTime(item.sendtime)" -->
+        </div>
+
+      <!--   <div class='esn-im-li-msg' ng-bind="item.msg"></div> -->
+      </div>
+    </li>
+    
+    <li ng-repeat="item in clist.team_list track by $index" class="esn-im-c-li esn-im-chatlist {{selectedId==item.uid?'active':''}}" ng-click='itemClickG(item)'>
+      <div class="esn-im-li-ico">
+        <img class="esn-li-icon icon-head"  ng-src={{item.avatar}}></img>
+      </div>
+      <div class="esn-im-li-text" ng-bind="item.group_name">
+        <!-- <div class='esn-im-li-top'> -->
+          <!-- <div class='esn-im-li-name'> -->
+            <!-- <div ng-bind="item.group_name" class='esn-im-li-name-label'></div> -->
+          <!-- <div class='esn-im-li-time-ex' ng-bind="item.group_name"></div> -->
+        <!-- </div> -->
+          <!-- <div class='esn-im-li-time'></div> -->
+          <!-- ng-bind="formartImTime(item.sendtime)" -->
+        <!-- </div> -->
+
+        <!-- <div class='esn-im-li-msg' ng-bind="item.msg"></div> -->
+      </div>
+    </li>
+    <li ng-repeat="item in clist.group_list track by $index" class="esn-im-c-li esn-im-chatlist {{selectedId==item.id?'active':''}}" ng-click='itemClickTG(item)'>
+      <div class="esn-im-li-ico">
+        <img class="esn-li-icon icon-head"  ng-src={{item.avatar[0]}}></img>
+      </div>
+      <div class="esn-im-li-text">
+        <div class='esn-im-li-top'>
+          <div class='esn-im-li-name'><div ng-bind="item.name" class='esn-im-li-name-label'></div></div>
+          <div class='esn-im-li-time'></div>
+          <!-- ng-bind="formartImTime(item.sendtime)" -->
+        </div>
+
+        <div class='esn-im-li-msg' ng-bind="item.msg"></div>
+      </div>         
+    </li>
+  </ul>
+</div>
+</div>
+<div id="im-container-main" class="esn-im-container-main"  ui-view>
+  
+   <!-- <input type="file" id="imfile">   
+   <input type="button" value="upload file" ng-click="fileNameChanged()"> -->
+    <div class="welcome">企业空间、沟通无限</div>
+</div>

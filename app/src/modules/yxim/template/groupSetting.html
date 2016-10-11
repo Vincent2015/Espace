@@ -1,0 +1,81 @@
+<div class="esn-right-dialog">
+  <div class="esn-right-dialog-grpset"  ng-click='revoke($event)'>
+          <div class="search-loading-animation esn-grpset-loading" ng-show='grpset.showloading'>
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+          <div class='esn-grpset-mask' ng-show='grpset.showMask'></div>
+
+          <div class="charge-head">
+            <span class="icon-web_icon_close charge-icon" ng-click="closeDiag($event)"></span>
+            <span>设置</span>
+          </div>
+          <div class='esn-grpset-main'>
+            <div class='esn-grpset-head'>
+                <div class='esn-grpset-title'>名称</div>
+                <input class='esn-grpset-name' ng-click='stopPop($event)' type='text' ng-model='param.name' readonly='true' />
+                <div class='esn-grpset-edit esn-grpset-sign' ng-show='isOwner' ng-click='editGroupName($event)'>编辑</div>
+            </div>
+            <!-- param.groupType =team 表示团队-->
+            <div class='esn-grpset-set'>
+                <div class='esn-grpset-set-item'>
+                    <div class='esn-grpset-set-item-title'>置顶聊天消息</div>
+                    <switchtool troggle='param.stick' ng-click='goStick($event)'></switchtool>
+                </div>
+                <div class='esn-grpset-set-item'>
+                    <div class='esn-grpset-set-item-title'>消息免打扰</div>
+                    <switchtool troggle='param.mute' ng-click='goRing($event)'></switchtool>
+                </div>
+            </div>
+            <div class='esn-grpset-member esn-grpset-onwer'>
+              <span class='esn-grpset-member-title' ng-if='param.groupType != "team"'>群主</span>
+              <span class='esn-grpset-member-title' ng-if='param.groupType == "team"'>团队管理员</span>
+              <span class='esn-grpset-member-number' ng-bind='group.owner.name'></span>
+              <span class='esn-grpset-member-changeOnwer icon-web_icon_transform' ng-show='isOwner' ng-click='changeOnwer($event)'>转让群主</span>
+            </div>
+            <div class='esn-grpset-member'>
+              <span class='esn-grpset-member-title' ng-if='param.groupType != "team"'>群成员</span>
+                <span class='esn-grpset-member-title' ng-if='param.groupType == "team"'>团队成员</span>
+              <span class='esn-grpset-member-number' ng-bind='group.members.length + "人"'>人</span>
+            </div>
+            <div class='esn-grpset-member-items-warp'>
+              <div class='esn-grpset-member-items'>
+                  <div class='esn-grpset-member-item esn-grpset-member-add' ng-click='addMember()' ng-if='param.groupType != "team" && (qz_user_type == 0 || qz_user_type == 1)'>
+                      <div class='esn-grpset-member-logo'>+</div>
+                      <div class='esn-grpset-member-text'>添加</div>
+                  </div>
+                  <div class='esn-grpset-member-item esn-grpset-member-remove' ng-show='isOwner' ng-click='showremoveGrpMemberLogo($event)' ng-if='param.groupType != "team"&& (qz_user_type == 0 || qz_user_type == 1)'>
+                      <div class='esn-grpset-member-logo'>-</div>
+                      <div class='esn-grpset-member-text'>移除</div>
+                  </div>
+                  <!-- 群主-->
+                  <div class='esn-grpset-member-item' ng-click="userCard(group.owner.id,group.owner)">
+                      <div class='esn-grpset-member-logo' style="border:none !important;">
+                  			<headerphoto item="group"></headerphoto>
+                        <!-- <img ng-src='{{group.owner.vcard.avatar}}' onerror="this.src='src/style/images/avt_default.png'"/> -->
+                      </div>
+                      <div class='esn-grpset-member-text' ng-bind='group.owner.name'></div>
+                  </div>
+                  <!-- 群成员 -->
+                  <div class='esn-grpset-member-item' ng-repeat='item in group.members' ng-if='group.owner.id != item.id' ng-click="userCard(item.id,item)">
+                      <div class='esn-grpset-member-logo' style="border:none !important;">
+                        <!-- <img ng-src='{{item.vcard.avatar}}' onerror="this.src='src/style/images/avt_default.png'"/> -->
+
+                    			<headerphoto item="item"></headerphoto>
+                        <div class='esn-grpset-remove-logo' ng-click='removeGrpMember($event,item)' ng-show='grpset.showremoveGrpMemberLogo'>-</div>
+                      </div>
+                      <div class='esn-grpset-member-text' ng-bind='item.name'></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class='esn-grpset-bottom esn-grpowner' ng-show='isOwner' ng-if='param.groupType != "team"'>
+              <div class='esn-grpset-bottom-dissolved' ng-click='dismissChatGroup($event)'>解散</div>
+              <div class='esn-grpset-bottom-out' ng-click='exitChatGroup($event)'>退出</div>
+          </div>
+          <div class='esn-grpset-bottom' ng-show='!isOwner' ng-if='param.groupType != "team"'>
+              <div class='esn-grpset-bottom-out' style='width:100%' ng-click='exitChatGroup($event)'>退出</div>
+          </div>
+    </div>
+</div>

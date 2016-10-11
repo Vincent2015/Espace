@@ -1,0 +1,229 @@
+<div class="esn-right-dialog" ng-init="init()">
+
+  <!--contacts_body_index首页-->
+  <div class="contacts_body_index">
+
+
+
+
+    <div class="c-head-table">
+      <div class="c-head-table-cell-i">
+           <span class="icon-web_icon_back cell-icon-adjust" ng-click="goBack()">
+      </div>
+      <div class="c-head-table-cell-t">
+        选择联系人
+      </div>
+      <div class="c-head-table-cell-i">
+        <span class="icon-web_icon_close cell-icon-adjust" ng-click="closeDiag()"></span>
+      </div>
+    </div>
+
+    <div class="c-p-container">
+      <!-- add by liucyu begain -->
+      <div class=esn-contacts-search-mask ng-click='delSearch("mask")' ng-show='showDelIcon'></div>
+      <div class="c-search">
+        <input placeholder="搜索" ng-model="search_keyword" type='text'>
+        <div class='c-search-del-icon icon-web_icon_delete' ng-show='showDelIcon || searchDelMask' ng-click='delSearch("icon")'></div>
+        <div class="search-loading-animation" style="right: 113px;" ng-show='showloading'>
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <div class='esn-search-nodata-prompt' ng-show='showDataPrompt'>没有找到对应数据</div>
+        <div class='esn-contacts-search-result' ng-show='showDelIcon'>
+              <div class="c-p-w esn-contact-search-item" ng-repeat="item in contactSearchModule.searchResult.contacts_list track by $index" >
+                <div class="p-checkbox-cell">
+                  <headerphoto item="item"></headerphoto>
+                </div>
+                <div class="p-info-cell c-search-cell">
+                  <span class="p-info-cell-name">{{item.uname}}</span>
+                  <input type='checkbox' class="esn-contacts-search-result-checkbox" checked='true' ng-if='item.checked'  ng-click="addPersonIntoSelectArray($event,item);">
+                  <input type='checkbox' class="esn-contacts-search-result-checkbox"  ng-if='!item.checked'  ng-click="addPersonIntoSelectArray($event,item);">
+                  <div class="esn-follow-add-checkbox"></div>
+                  <div class="esn-follow-add-checkbox-mask" ng-if='item.checked'></div>
+                </div>
+              </div>
+              <div class="esn-contact-search-more" ng-if='contactSearchModule.moreMemberTemp.length > 0' ng-click='contactSearchModule.moreMember(search_keyword)'>加载更多...</div>
+          </div>
+
+          <!-- add by liucyu end -->
+
+
+      </div>
+
+
+      <div class="c-li-table" ng-click="go_to_detail(1)">
+        <div class="c-li-cell1">
+          <div class="icon_organization"></div>
+        </div>
+        <div class="c-li-cell2">
+          组织架构
+        </div>
+        <div class="c-li-cell3">
+          <span class="icon-web_icon_goto"></span>
+        </div>
+      </div>
+
+
+
+      <div class="c-li-table" ng-click="go_to_detail(2)">
+        <div class="c-li-cell1">
+          <div class="icon_team"></div>
+        </div>
+        <div class="c-li-cell2">
+          我的团队
+        </div>
+        <div class="c-li-cell3">
+          <span class="icon-web_icon_goto"></span>
+        </div>
+      </div>
+
+
+
+      <div class="c-li-table" ng-click="go_to_detail(3)">
+        <div class="c-li-cell1">
+          <div class="icon_follow"></div>
+        </div>
+        <div class="c-li-cell2">
+          我的关注
+        </div>
+        <div class="c-li-cell3">
+          <span class="icon-web_icon_goto"></span>
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="line-divide-c-w">
+        <span>常用联系人</span>
+      </div>
+
+
+      <div class="c-p-list">
+        <div class="c-p-w" ng-repeat="each in commonContactsList">
+          <div class="p-checkbox-cell">
+            <headerphoto item="each"></headerphoto>
+            <!-- <img class="p-info-cell-img" ng-src="{{ each.from.vcard.avatar  || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+          </div>
+          <div class="p-info-cell">
+            <span class="p-info-cell-name">{{each.from.name}}</span>
+            <div class="esn-follow-add-checkbox" ng-click="contactsManager.addOnePerson($event, each.id);"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="c-p-foot">
+      <div class="foot-img-w">
+        <headerphoto ng-repeat="each in selectedList"  item="each" size="24" fontsize="10"></headerphoto>
+        <!-- <img ng-repeat="each in selectedList" class="p-foot-img" ng-src="{{each.from.vcard.avatar || each.avatar || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+      </div>
+      <div class="foot-btn-w">
+        <button class="c-p-foot-btn" tabindex="3" ng-click="getSelectedList()">
+          <span>确定</span>
+          <span ng-if="selectedList.length > 0">({{selectedList.length}})</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--contacts_body_detail下级页-->
+  <div class="contacts_body_detail" ng-if="detail_show">
+
+    <div class="c-head-table">
+      <div class="c-head-table-cell-i">
+        <span class="icon-web_icon_back cell-icon-adjust" ng-click="back_index()"></span>
+      </div>
+      <div class="c-head-table-cell-t">
+        选择联系人
+      </div>
+      <div class="c-head-table-cell-i">
+        <span class="icon-web_icon_close cell-icon-adjust" ng-click="closeDiag()"></span>
+      </div>
+    </div>
+
+    <div class="c-p-container">
+
+      <div ng-if="selected_num == 1">
+        <Org></Org>
+      </div>
+
+      <div ng-if="selected_num == 2">
+        <Team></Team>
+      </div>
+
+      <div ng-if="selected_num == 3" >
+        <Follower></Follower>
+      </div>
+
+    </div>
+
+    <div class="c-p-foot">
+      <div class="foot-img-w">
+        <headerphoto ng-repeat="each in selectedList"  item="each" size="24" fontsize="10"></headerphoto>
+        <!-- <img ng-repeat="each in selectedList" class="p-foot-img" ng-src="{{ each.from.vcard.avatar || each.avatar || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+      </div>
+      <div class="foot-btn-w">
+        <button class="c-p-foot-btn" tabindex="3" ng-click="getSelectedList()">
+          <span>确定</span>
+          <span ng-if="selectedList.length > 0">({{selectedList.length}})</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--contacts_body_detail_sub 联系人列表页 第三级页面-->
+  <div class="contacts_body_detail_sub" ng-if="detail_sub_show">
+
+    <div class="c-head-table">
+      <div class="c-head-table-cell-i">
+        <span class="icon-web_icon_back cell-icon-adjust" ng-click="back_detail()"></span>
+      </div>
+      <div class="c-head-table-cell-t">
+        选择联系人
+      </div>
+      <div class="c-head-table-cell-i">
+        <span class="icon-web_icon_close cell-icon-adjust" ng-click="closeDiag()"></span>
+      </div>
+    </div>
+
+
+
+    <div class="c-p-container">
+
+      <Personlist route-Params="routeParams"></Personlist>
+
+    </div>
+
+    <div class="c-p-foot">
+      <div class="foot-img-w">
+        <headerphoto ng-repeat="each in selectedList track by $index"  item="each" size="24" fontsize="10"></headerphoto>
+        <!-- <img ng-repeat="each in selectedList" class="p-foot-img" ng-src="{{each.from.vcard.avatar ||each.avatar || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+      </div>
+      <div class="foot-btn-w">
+        <button class="c-p-foot-btn" tabindex="3" ng-click="getSelectedList()">
+          <span>确定</span>
+          <span ng-if="selectedList.length > 0">({{selectedList.length}})</span>
+        </button>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+</div>

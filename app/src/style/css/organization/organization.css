@@ -1,0 +1,215 @@
+
+.organization-wrapper{
+  -webkit-user-select: none;
+  background: #fff;
+  overflow-y: auto;
+}
+.or-content-head {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  z-index: 10;
+  top: 49px;
+}
+.or-content-head-item{
+  flex-shrink: 0;
+  position: relative;
+}
+@media screen and (max-width: 900px) {
+  .float-item-org {
+
+   width: 33.33% !important;
+ }
+}
+@media screen and (min-width: 900px) and (max-width: 1210px) {
+  .float-item-org {
+   width: 25% !important;
+ }
+}
+
+@media screen and (min-width: 1210px) {
+  .float-item-org {
+
+   width: 20% !important;
+ }
+}
+
+.float-item-org:hover , .table-wrapper:hover {
+  background: rgba(0, 147, 255, 0.05);
+}
+.float-item-org {
+  /*margin: 5px;
+  height: 64px;
+  padding: 20px;
+  border-radius: 4px;
+  display: inline-flex;
+  vertical-align: middle;
+  float: left;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  position: relative;*/
+  /* margin: 5px; */
+  height: 64px;
+  /* padding: 20px; */
+  border-radius: 4px;
+  display: flex;
+  vertical-align: middle;
+  float: left;
+  /* justify-content: space-around; */
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  /*border: 1px solid red;*/
+  padding-left: 12px;
+}
+
+.float-item-org .content-cell:last-child{
+    /*border: 1px solid blue;*/
+    width: 100%;
+    margin-left: 16px;
+}
+
+ .line-divide-first {
+  /*margin-top: 57px;*/
+}
+ .content-group-wrapper {
+  background: white;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+ .esn-right-container img.headImg {
+  margin-right: 12px;
+}
+ .sub-org {
+  font-size: 13px;
+  /*font-weight: 500;*/
+}
+ .table-wrapper {
+  padding-left: 21px;
+  height: 56px;
+  border-bottom: 1px solid #EBEFF4;
+  cursor: pointer;
+}
+ .table-wrapper div{
+  font-size: 13px;
+}
+ .table-wrapper span{
+  font-size: 13px;
+  color:#B7C0C7;
+}
+
+
+
+
+
+ .line-divide-wrapper {
+  display: table;
+  width: 100%;
+  height: 30px;
+  padding-left: 21px;
+  color: #8899A6;
+  font-size: 12px;
+  background-color: #F0F4F6;
+  border-bottom: 1px solid #E2E8ED;
+}
+.line-divide-wrapper div{
+  font-size: 12px;
+}
+.line-divide-wrapper .table-cell:nth-last-child(1){
+  width: 42px;
+}
+ .triangle-down{
+  margin: 0px auto;
+  width:0;
+  height:0;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-top:7px solid #98B9D2;
+  -webkit-user-select: none;
+}
+ .triangle-up{
+  margin: 0px auto;
+  width:0;
+  height:0;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-bottom:7px solid #98B9D2;
+  -webkit-user-select: none;
+}
+ .triangle-right{
+  margin: 0px auto;
+  width:0;
+  height:0;
+  -webkit-user-select: none;
+  border-top:5px solid transparent;
+  border-bottom :5px solid transparent;
+  border-left :7px solid #98B9D2;
+
+}
+
+.over-flow-group{
+  height: 68px;
+  /*height: 0px;*/
+  overflow: hidden;
+}
+
+.over-flow-subsidiary{
+  height: 56px !important;
+  /*overflow: hidden;*/
+}
+
+
+
+.deptmemberlist .loadingmore{
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  color: rgba(51, 41, 41, 0.56);
+  padding: 0px 0px 12px;
+  clear: both;
+}
+.teamlist-label{
+  line-height: 41px;
+
+}
+.people-duty{
+  font-size: 12px;
+  color: #B7C0C7;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.line-set{
+ line-height:1.4em;
+ overflow : hidden;
+ text-overflow: ellipsis;
+ display: -webkit-box;
+ -webkit-line-clamp: 1;
+ -webkit-box-orient: vertical;
+}
+.esn-org-head-span:first-child {
+  color: #007ddc !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+.esn-org-head-span {
+  padding: 3px;
+}
+/*.esn-org-head-span:not(:last-child)::before{
+  position: absolute;
+    left: 134;
+    top: 22px;
+    content: "";
+    height: 10px;
+    width: 10px;
+    border-top: 2px solid #d00b0b;
+    border-right: 2px solid red;
+    background-color: transparent;
+    transform: rotate(45deg);
+}*/

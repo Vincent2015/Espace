@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2"
+  },
+  "name": "cache",
+  "version": "1.0.1",
+  "description": "YYIMCache",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-cached": "^1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-footer": "^1.0.5",
+    "gulp-header": "^1.7.1",
+    "gulp-remember": "^0.3.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-uglify": "^1.5.1",
+    "jshint": "^2.9.1",
+    "gulp-rename": "^1.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cache"
+  ],
+  "author": "rongqb",
+  "license": "ISC"
+}

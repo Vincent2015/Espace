@@ -1,0 +1,6 @@
+define([
+  "./mainController",
+  "./mainService"
+  ], function () {
+
+});

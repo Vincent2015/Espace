@@ -1,0 +1,49 @@
+<div class="esn-right-container" ng-init="init()">
+  <div class="content-head">
+    <span>最近联系人</span>
+  </div>
+
+  <div class="content-body">
+    <div class="content-group-wrapper">
+      <div class="group-wrapper">
+        <div ng-if="!frendListMananger" style="text-align: -webkit-center;padding: 8px;">
+          暂无最近联系人
+        </div>
+        <!-- ng-if='qz_user_type == 1 || qz_user_type ==0'  非经销商或者管理员才能看到 -->
+        <div class="float-item-org" ng-if='qz_user_type == 1 || qz_user_type ==0' ng-repeat="each in frendListMananger"  ng-click="userCard(each.member_id,each)">
+
+            <div class="content-cell" style="width:52px">
+              <headerphoto item="each"></headerphoto>
+              <!-- <img class="headImg" ng-src="{{each.avatar}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+            </div>
+            <div class="content-cell">
+              <div class="people-name">{{each.name}}</div>
+              <div class="people-duty" ng-if="each.duty">{{each.duty}}</div>
+              <div class="people-duty" ng-if="!each.duty">&nbsp;</div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div class="row">
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+  <div class="col-md-1">.col-md-1</div>
+</div> -->
+
+
+
+
+</div>

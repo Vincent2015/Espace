@@ -1,0 +1,23 @@
+
+
+  <div >
+    <div class="sub-org" >
+      <div ng-repeat="each in teamList" class="table-wrapper" ng-click="go_to_detail_sub({type:'team', id: each.gid, group_name:each.group_name})">
+        <div class="table-cell">
+          <headerphoto item="each" fontsize="20" align="middle"></headerphoto>
+          <!-- <img class="headImg" ng-src="{{each.avatar || 'src/style/images/avt_default.png'}}" > -->
+          <lable class="teamlist-label"> {{each.group_name}}</lable>
+        </div>
+        <div class="table-cell" style="width:60px;text-align: right;padding-right: 12px;">
+            <span style="color:#B7C0C7">{{each.groupMemberCount}}</span>
+            <span class="icon-web_icon_goto" style="position:relative;top:1px"></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="c-org-spreadall" ng-if="teamList.length == 0 || !teamList">
+        暂无团队
+  </div>

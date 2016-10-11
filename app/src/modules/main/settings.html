@@ -1,0 +1,54 @@
+<div class='esn-main-aboutUs esn-main-settings'>
+      <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()">+</span>
+          <div class="title">
+              系统设置
+          </div>
+      </header>
+       <section>
+         <div class="esn-section-row">
+           <label>消息提醒</label>
+           <div class="esn-switch">
+             <input type="checkbox" class="esn-settings-checkbox" ng-model="isRemind"/>
+             <div class="btnSwitch">
+             </div>
+           </div>
+         </div>
+         <div class="esn-section-row">
+           <label>打开提示音</label>
+           <div class="esn-switch">
+             <input type="checkbox" class="esn-settings-checkbox" ng-model="isSounds"/>
+             <div class="btnSwitch">
+             </div>
+           </div>
+         </div>
+         <div class="esn-section-row" style="display:none;">
+           <label class="esn-set-title">激活窗口快捷键</label>
+           <input type="text" class="esn-set-input" ng-keydown="activation_keydown($event)" placeholder="请设置快捷键" ng-model="activation" readonly="readonly"/>
+           <!-- <bottom class="btn-settings">设置快捷键</bottom> -->
+         </div>
+         <div class="esn-section-row" style="display:none;">
+           <label class="esn-set-title">截图快捷键</label>
+           <input type="text" class="esn-set-input" ng-keydown="screenshot_keydown($event)" placeholder="请设置快捷键" ng-model="screenshot" readonly="readonly"/>
+           <!-- <bottom class="btn-settings">shift + alt + a</bottom> -->
+         </div>
+         <div class="esn-section-row">
+           <label class="esn-set-title">发送消息快捷键</label>
+            <div class="esn-sendmsg-choose">
+              <div><label class="{{choose_e}}" ng-click="setChoose(true)">Enter 发送</label></div>
+              <div><label class="{{choose_ce}}" ng-click="setChoose(false)">Ctrl+Enter 发送</label></div>
+            </div>
+           <!-- <input type="text" class="esn-set-input" ng-keydown="sendmsg_keydown($event)" placeholder="请设置快捷键" ng-model="sendmsg" readonly="readonly"/> -->
+           <!-- <bottom class="btn-settings">enter</bottom>closeThisDialog -->
+         </div>
+         <div class="esn-section-row">
+           <label style="margin-top:5px;">版本号</label>
+           <label style="margin-top:5px;">{{version}}</label>
+           <bottom class="btn-settings" ng-click="checkUpdate()">检测更新</bottom>
+         </div>
+       </section>
+
+       <footer>
+          <bottom class="esn-confirm" ng-click="confirm()">确定</bottom>
+       </footer>
+</div>

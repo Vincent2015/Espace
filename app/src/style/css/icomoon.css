@@ -1,0 +1,215 @@
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?4juiro');
+    src:    url('../fonts/icomoon.eot?4juiro#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?4juiro') format('truetype'),
+    url('../fonts/icomoon.woff?4juiro') format('woff'),
+    url('../fonts/icomoon.svg?4juiro#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-web_icon_download:before {
+  content: "\e93b";
+}
+.icon-web_icon_open:before {
+  content: "\e93c";
+}
+.icon-web_icon_preview:before {
+  content: "\e93d";
+}
+.icon-web_icon_sendout2:before {
+  content: "\e938";
+}
+.icon-web_icon_notremind:before {
+  content: "\e939";
+}
+.icon-web_icon_message_group:before {
+  content: "\e93e";
+}
+.icon-web_icon_message_dynamic:before {
+  content: "\e93a";
+}
+.icon-web_icon_message_announcement:before {
+  content: "\e91b";
+}
+.icon-web_icon_message_application:before {
+  content: "\e932";
+}
+.icon-web_icon_message_approve:before {
+  content: "\e933";
+}
+.icon-web_icon_message_schedule:before {
+  content: "\e934";
+}
+.icon-web_icon_message_space:before {
+  content: "\e935";
+}
+.icon-web_icon_message_subscribe:before {
+  content: "\e936";
+}
+.icon-web_icon_message_team:before {
+  content: "\e937";
+}
+.icon-web_icon_selected:before {
+  content: "\e92f";
+}
+.icon-web_icon_meeting_offvoice:before {
+  content: "\e92a";
+}
+.icon-web_icon_meeting_openvoice:before {
+  content: "\e92b";
+}
+.icon-web_icon_meeting_remove:before {
+  content: "\e92c";
+}
+.icon-web_icon_meeting_over:before {
+  content: "\e92d";
+}
+.icon-web_icon_meeting_start:before {
+  content: "\e92e";
+}
+.icon-web_icon_attention:before {
+  content: "\e917";
+}
+.icon-web_icon_contactlist:before {
+  content: "\e926";
+}
+.icon-web_icon_group:before {
+  content: "\e927";
+}
+.icon-web_icon_organization:before {
+  content: "\e928";
+}
+.icon-web_icon_team:before {
+  content: "\e929";
+}
+.icon-web_icon_question:before {
+  content: "\e90f";
+}
+.icon-web_icon_help:before {
+  content: "\e911";
+}
+.icon-web_icon_mailbox:before {
+  content: "\e913";
+}
+.icon-web_icon_service:before {
+  content: "\e915";
+}
+.icon-web_icon_transform:before {
+  content: "\e931";
+}
+.icon-web_icon_edit:before {
+  content: "\e91a";
+}
+.icon-web_icon_teamset:before {
+  content: "\e91d";
+}
+.icon-web_icon_adduser:before {
+  content: "\e918";
+}
+.icon-web_icon_file:before {
+  content: "\e916";
+}
+.icon-web_icon_dudu:before {
+  content: "\e907";
+}
+.icon-web_icon_history-23:before {
+  content: "\e909";
+}
+.icon-web_icon_screenshot:before {
+  content: "\e90b";
+}
+.icon-web_icon_sent_document:before {
+  content: "\e90d";
+}
+.icon-web_icon_a-tail:before {
+  content: "\e900";
+}
+.icon-web_icon_camera:before {
+  content: "\e901";
+}
+.icon-web_icon_more:before {
+  content: "\e902";
+}
+.icon-web_icon_expression:before {
+  content: "\e903";
+}
+.icon-web_icon_speech:before {
+  content: "\e904";
+}
+.icon-web_icon_topic:before {
+  content: "\e905";
+}
+.icon-web_icon_picture:before {
+  content: "\e906";
+}
+.icon-web_icon_discover_selected:before {
+  content: "\e908";
+}
+.icon-web_icon_set_selected:before {
+  content: "\e91c";
+}
+.icon-web_icon_add_selected:before {
+  content: "\e90a";
+}
+.icon-web_icon_application_selected:before {
+  content: "\e90c";
+}
+.icon-web_icon_mail_selected:before {
+  content: "\e90e";
+}
+.icon-web_icon_message_selected:before {
+  content: "\e910";
+}
+.icon-web_icon_contacts_selected:before {
+  content: "\e912";
+}
+.icon-web_icon_dudu_selected:before {
+  content: "\e914";
+}
+.icon-web_icon_sendout:before {
+  content: "\e919";
+}
+.icon-web_icon_close:before {
+  content: "\e91e";
+}
+.icon-web_icon_back:before {
+  content: "\e930";
+}
+.icon-web_icon_search:before {
+  content: "\e91f";
+}
+.icon-web_icon_teamlist:before {
+  content: "\e920";
+}
+.icon-web_icon_goto:before {
+  content: "\e921";
+}
+.icon-web_icon_username:before {
+  content: "\e922";
+}
+.icon-web_icon_password:before {
+  content: "\e923";
+}
+.icon-web_icon_delete:before {
+  content: "\e924";
+}
+.icon-web_icon_visible:before {
+  content: "\e925";
+}

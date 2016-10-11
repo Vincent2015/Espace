@@ -1,0 +1,104 @@
+<div class="IMChat-list msg z" ng-if="'RECENTLIST' | getSpectacle">
+	<div ng-include="'src/modules/yxim/template/create-dialog.htm'"></div>
+
+	<!-- 搜索 -->
+	<div class="IMChat-search-container cl">
+		<div class="IMChat-search z" ng-controller="personSearchController">
+		   <ui-select ng-model="multipleDemo.selectedPeopleWithGroupBy" theme="bootstrap"  title="搜索联系人/群组"  on-select="goToMessage_Search($item,$event)"
+	            ng-disabled="disabled">		   <!--on-select="goToPersoninfo_Search($item)"-->
+		    <ui-select-match placeholder="搜索联系人/群组">{{$select.selected.name}}</ui-select-match>
+		    <ui-select-choices group-by="someGroupFn" repeat="search in searchList"  refresh="refreshPersons($select.search)" refresh-delay="400">
+		    	<div ng-click="goToMessage_Search(search,$event)" ng-keyup="goToMessage_Search(search,$event)" class="search-cont">
+				    <!-- <div class="avt-s-l rainbow-{{search.name|getFirstLetter}} sys-icon-man" ng-bind-html="search.name | cutString:1:2"></div> -->
+						<headerphoto item='search' align="middle" fontsize="14" margintop="-10"></headerphoto>
+						<span ng-bind-html="search.name | highlight: $select.search" class="search-name"></span>
+		    	</div>
+		    </ui-select-choices>
+		    </ui-select>
+		</div>
+
+		<!-- <span class="IMChat-create z" ng-click="createDialog($event)">
+		</span> -->
+	</div>
+
+
+<div class='list-out-wrapper'>
+	<div class='list-inner-wrapper'>
+ 	<div class="list-wrapper {{isShowDingYue?'outleft':'inmid'}}">
+		    <div ng-class="{cur: $state.includes('main.imhomeplus.message',{personId:item.id}),stick:!!item.stick}" class="list-item" ng-repeat="item in recentList" ng-click="item.type=='folded'?goSubscribe(item,$event):goToMessage(item,$event)">
+		        <div class="l-blk" >
+		            <span  ng-click="removeitem(item,$event)"></span>
+								<headerphoto item="item"></headerphoto>
+
+		            <!-- <div class="avt-s-l on-line rainbow-{{item.name|getFirstLetter}} sys-icon-man" ng-if="item.type=='chat'"   ng-class="{true:'on-line',false:'off-line'}[getUserCurrentState(item)]" ng-bind-html="item.name | cutString:1:2"></div> -->
+									<!-- <div class="avt-s-l g-history  rainbow-{{'群组'|getFirstLetter}}  sys-icon-man" ng-if="item.type=='groupchat'"    ng-bind-html="'群组'"></div>
+	                <div class="avt-s-l g-history  rainbow-{{item.name|getFirstLetter}} sys-icon-man" ng-if="item.name&&item.type=='shenpi'"    ng-bind-html="'审批'"></div>
+	                <div class="avt-s-l g-history  rainbow-{{item.name|getFirstLetter}} sys-icon-man" ng-if="item.name&&item.type=='tixing'"    ng-bind-html="item.name | cutString:1:2"></div>
+									<div class="avt-s-l g-history  rainbow-{{'消息'|getFirstLetter}}  sys-icon-man" ng-if="!item.businessType && item.type=='pubaccount'"   ng-bind-html="'消息'"></div>
+                  <div class="avt-s-l g-history  {{item.businessType.key}} sys-icon-man" ng-if="item.businessType && item.type=='pubaccount'"   ng-bind-html="item.businessType.value"></div> -->
+		        </div>
+
+		         <div class="r-blk" >
+		            <div class="clearfix">
+		            	<div ng-if="!istoday(item.dateline)  && item.type!=='folded'"  class="y latest-time">{{item.dateline| date:"MM-dd"}}</div>
+		            	<div ng-if="istoday(item.dateline) &&item.type!=='folded'"  class="y latest-time">{{item.dateline| date:"HH:mm"}}</div>
+		            	<div class="y unread-msg-num" ng-class="{foldedNum:item.type=='folded'}"
+		            	ng-if="item.notice<=99 && item.notice>0  && !item.recentList"   ng-bind="item.notice"></div>
+									<div class="y unread-msg-num" ng-class="{foldedNum:item.type=='folded'}" ng-if="item.notice>0 && !!item.recentList" ></div>
+
+	                <i class="text-ellipsis im-llist-name"  ng-if="item.name" >
+										<i ng-if="!item.from" ng-bind-html="item.name"></i>
+										<i ng-if="item.from" ng-bind-html="item.from.name"></i>
+										<i ng-if="item.from.groupType && item.from.groupType=='team'" class="esn-grouptype">团队</i>
+										<i ng-if="item.from.groupType && item.from.groupType=='dealer'" class="esn-grouptype">经销商</i>
+									</i>
+	                <i class="text-ellipsis" ng-if="!item.name"  ng-bind-html="item.id "></i>
+									<div class="y weak"></div>
+		            </div>
+		            <div class="weak text-ellipsis im-llist-msg">
+		            	<span ng-if="item.isHaveAt" class="atColor">[有人@你]</span>
+		            	<span ng-bind-html="analysisStateHtml(item.showState,item) | cutString:1:20" style='font-size:13px;'></span>
+		            </div>
+		        </div>
+						<div class='esn-ring icon-web_icon_notremind' ng-show='item.mute'></div>
+		    </div>
+	</div>
+	<div class="list-subscribe" style="{{subscribeStyle}}">
+		<div class="list-subscribe-header">
+			<span class="subscribe-back" ng-click="goBack()">返回</span>
+			<label class="sub-title">订阅号</label>
+		</div>
+		<div class="list-content">
+			<div ng-repeat="subscribe in subscribes track by $index" ng-class="{cur: curId == subscribe.id}" class="list-subItem" ng-click="goToMessage(subscribe,$event)">
+				<div class="subItem-l">
+					<!-- <span  ng-click="removeitem(item,$event)"></span> -->
+					<headerphoto item="subscribe"></headerphoto>
+				</div>
+				<div class="subItem-r">
+					<div class="clearfix">
+						<div ng-if="!istoday(subscribe.dateline)"  class="y latest-time">{{subscribe.dateline| date:"MM-dd"}}</div>
+						<div ng-if="istoday(subscribe.dateline)"  class="y latest-time">{{subscribe.dateline| date:"HH:mm"}}</div>
+						<div class="y unread-msg-num"  ng-if="subscribe.notice<=99 && subscribe.notice>0"    ng-bind="subscribe.notice"></div>
+						<div class="y unread-msg-num"  ng-if="subscribe.notice>99"    >...</div>
+						<i class="text-ellipsis im-llist-name"	 ng-if="subscribe.name"  ng-bind-html="subscribe.name "></i>
+					 	<i class="text-ellipsis" ng-if="!subscribe.name"  ng-bind-html="subscribe.id "></i>
+					 	<div class="y weak"></div>
+					</div>
+					<div class="weak text-ellipsis im-llist-msg">
+						<span ng-bind-html="analysisStateHtml(subscribe.showState)" style='font-size:13px;'></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="list-wrapper {{isShowDingYue?'inmid':'outright'}}"></div>
+</div>
+</div>
+
+</div>
+
+<div ui-view id="IMChat-content" class="IMChat-dialog">
+	<div id="default_blank">
+		<div class="developer-info">欢迎使用企业空间桌面端</div>
+	</div>
+</div>

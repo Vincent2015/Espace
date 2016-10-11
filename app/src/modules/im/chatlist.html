@@ -1,0 +1,45 @@
+<div class='em-im-win-list'>
+  <im-loading></im-loading>
+
+  <div ng-repeat="item in list">
+
+    <div ng-switch="item.mtype">
+      <div ng-switch-when="0">
+        <div class='em-im-list-sendtime' ng-bind='item.formatsendtime'></div>
+        <div class='em-im-chat-item {{user_mid==item.uid?"rowreverse":""}}'>
+          <div class='em-im-list-tx {{imType=="person"?"em-im-list-person-tx":""}}'>
+            <img draggable="false" ng-src={{item.avatar}}>
+          </div>
+          <div class='em-im-list-content  {{user_mid==item.uid?"contentreverse":""}}'>
+            <div ng-if='imType!="person"' class='em-im-list-name' ng-bind="item.name"></div>
+            <div class='em-im-list-mes {{user_mid==item.uid?"im-arrow-right":"im-arrow-left"}}' ng-bind-html="item.msg|expressionFilter|to_trusted"></div>
+          </div>
+          <div ng-switch="item.row_status">
+            <div class='em-im-item-error {{imType=="person"?"":"em-im-item-mt"}}' ng-switch-when="0">
+              发送失败!
+            </div>
+            <div ng-switch-when="1">
+            </div>
+            <div class='em-im-item-sending {{imType=="person"?"":"em-im-item-mt"}}' ng-switch-when="2">
+              正在发送...
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-switch-when="1">
+        <div class='em-im-list-sendtime' ng-bind='item.formatsendtime'></div>
+        <div class='em-im-chat-item {{user_mid==item.uid?"rowreverse":""}}'>
+          <div class='em-im-list-tx'>
+            <img draggable="false" ng-src={{item.avatar}}>
+          </div>
+          <div class='em-im-list-content {{user_mid==item.uid?"contentreverse":""}}'>
+              <div im-image img-src={{item.msg}} class='em-im-list-img-wrapper {{user_mid==item.uid?"im-img-arrow-right":"im-img-arrow-left"}}'>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

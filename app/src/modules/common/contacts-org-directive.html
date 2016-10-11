@@ -1,0 +1,54 @@
+<div class="c-org-head">
+
+  <div ng-repeat = "each in navHeadHandler.navHeadArray" class="c-nav-head-w" ng-click="refreshOrgById(each)">
+   <span ng-class="{true: 'c-nav-head-text active', false: 'c-nav-head-text'}[$index == 0]" >{{each.name}}</span>
+   <span ng-class="{true: 'icon-web_icon_goto c-nav-icon-adjust active', false: 'icon-web_icon_goto c-nav-icon-adjust'}[$index == 0]" ng-if="$index != navHeadHandler.navHeadArray.length-1"></span>
+  </div>
+
+</div>
+
+
+<div class="line-divide-c-w">
+  <span>组织成员</span>
+</div>
+
+<div class="c-p-list" ng-class="{'c-org-list-w': orgContactsList.length >= 4}">
+  <div class="c-p-w" ng-repeat="each in orgContactsList">
+    <div class="p-checkbox-cell">
+      <!-- <img class="p-info-cell-img" ng-src="{{each.avatar || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+      <headerphoto item="each"></headerphoto>
+    </div>
+    <div class="p-info-cell">
+      <span class="p-info-cell-name">{{each.name}}</span>
+      <div class="esn-follow-add-checkbox" ng-click="OrgPersonListManager.addOnePerson($event, each);"></div>
+    </div>
+  </div>
+</div>
+
+<div class="c-org-spreadall" ng-if="orgContactsList.length >= 4" ng-click="go_to_detail_sub({type:'org', id: cur_org_id, orgContactsList: orgContactsList})">
+  展开全部
+</div>
+
+<div class="c-org-spreadall" ng-if="orgContactsList.length == 0 || !orgContactsList">
+      暂无组织成员
+</div>
+
+
+<div class="line-divide-c-w">
+  <span>下属组织</span>
+</div>
+
+<div class="c-list-table" ng-repeat="each in sub_organization" ng-click = "refreshOrgById(each)">
+  <div class="c-li-cell-text">
+     {{each.name}}
+  </div>
+  <div class="c-li-cell-icon">
+    <span class="text-small-color">{{each.count}}</span>
+    <span class="icon-web_icon_goto icon-adjust"></span>
+  </div>
+</div>
+
+
+<div class="c-org-spreadall" ng-if="sub_organization.length == 0 || !sub_organization">
+      暂无下属组织
+</div>

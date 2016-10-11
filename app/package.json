@@ -1,0 +1,21 @@
+{
+	"name": "企业空间",
+	"version": "1.0.0",
+	"main": "index.htm",
+	"node-remote": "http://*;https://*",
+	"user-agent": "Mozilla/5.0 (%osinfo) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%webkit_ver Safari/537.36 nw(%nwver) YonyouIM(%ver)",
+	"chromium-args": "--disable-setuid-sandbox",
+	"window": {
+		"toolbar": false,
+		"frame": false,
+		"width": 900,
+		"min_width": 900,
+		"min_height": 600,
+		"height": 600,
+		"position": "center",
+		"icon": "esn.ico"
+	},
+	"webkit": {
+		"plugin": true
+	}
+}

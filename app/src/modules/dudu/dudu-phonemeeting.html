@@ -1,0 +1,81 @@
+<div class="esn-right-container">
+
+  <div class="content-head">
+    <span>电话会议</span>
+  </div>
+
+  <div class="content-body" style="bottom:48px">
+
+    <div class="line-divide-w">
+      <span>主持人</span>
+    </div>
+
+    <div class="content-host-w">
+      <div class="content-cell">
+        <img class="headImg" src="src/style/images/dudu/image2.png" onerror="this.src='src/style/images/avt_default.png'">
+      </div>
+      <div class="content-cell">
+        <div class="people-name" style="">曹天乐</div>
+        <div style="font-size:12px;color:#B7C0C7">总裁</div>
+      </div>
+
+    </div>
+
+    <div class="line-divide-w">
+      <span>参与人</span>
+    </div>
+
+
+
+    <div class="content-group-wrapper">
+      <div class="group-wrapper">
+
+        <div class="float-item-org" ng-repeat="each in personMananger.meeting_numbers" ng-mouseover="hoverIn($index)" ng-mouseleave="hoverOut($index)" ng-click="userCard($index)">
+          <img class="headImg"  src="src/style/images/dudu/image3.png" onerror="this.src='src/style/images/avt_default.png'">
+          <span class="people-name people-text">{{each.id}}</span>
+
+          <div ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-if="each.active">
+            <div class="p-table-wrapper">
+              <div class="table-cell" >
+                <span class="icon-web_icon_meeting_remove icon-revise" ng-click="personMananger.remove_person($index)"></span>
+                <span class="icon-tip-text">移除会议</span>
+              </div>
+              <div class="table-cell">
+                <span class="icon-web_icon_meeting_offvoice icon-revise"></span>
+                <span class="icon-tip-text">静音</span>
+              </div>
+            </div>
+          </div>
+
+          <div ng-class="{true: 'inactive', false: 'active'}[isActive]" ng-if="each.unactive">
+            <span class="icon-web_icon_meeting_remove icon-revise" style="margin-top: 9px;" ng-click="personMananger.remove_person($index)"></span>
+            <span class="icon-tip-text">删除</span>
+          </div>
+
+        </div>
+
+        <div class="float-item-org" ng-click="personMananger.add_person()" >
+          <span class="add_people">
+            <span class="icon-add">+</span>
+          </span>
+          <span style="" class="icon-add-font">添加</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+  <div class="content-foot">
+    <div>
+      <span class="icon-web_icon_meeting_over meeting_start_adjust" ng-class="{true:'icon-web_icon_meeting_over meeting_end_adjust', false:'icon-web_icon_meeting_start meeting_start_adjust'}[isActive]"></span>
+      <span class="meeting-status-start" ng-class="{true: 'meeting-status-end', false: 'meeting-status-start'}[isActive]">{{meeting_text}}</span>
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,57 @@
+<div class='esn-contact-search-main'>
+    <div class='esn-contact-search-header'>
+        <div class='esn-contact-search-log'>
+             <div class='esn-contact-search-log-warp'>
+                <!-- <img ng-src='{{detail.avatar}}' onerror="this.src='src/style/images/avt_default.png'"/> -->
+
+              <headerphoto info="detailInfo" size="81" fontsize="20"></headerphoto>
+                <div class='esn-contact-search-log-name'>{{detail.name}}</div>
+             </div>
+              <div class='esn-contact-search-log-follower' ng-if='ownerId != detail.member_id && detail.follow_status==4 || detail.follow_status==3' ng-click="followMember(detail.member_id,detail.follow_status)">+关注</div>
+              <div class='esn-contact-search-log-follower' ng-if='ownerId != detail.member_id && detail.follow_status==1 || detail.follow_status==2' ng-click="followMember(detail.member_id,detail.follow_status)">取消关注</div>
+              <!-- <div class='esn-contact-search-log-follower' ng-if='detail.follow_status==2'>互相关注</div>
+              <div class='esn-contact-search-log-follower' ng-if='detail.follow_status==3'>对方关注我</div> -->
+
+
+        </div>
+    </div>
+    <div class='esn-contact-search-main'>
+        <div class='esn-contact-search-info'>
+              <ul class='esn-contact-search-info-ul'>
+                  <li>
+                      <span class='esn-contact-search-info-title'>手机</span>
+                      <span class='esn-contact-search-info-content'>{{detail.mobile}}</span>
+                  </li>
+                  <li>
+                      <span class='esn-contact-search-info-title'>邮箱</span>
+                      <span class='esn-contact-search-info-content'>{{detail.email}}</span>
+                  </li>
+                  <li>
+                      <span class='esn-contact-search-info-title'>部门</span>
+                      <span class='esn-contact-search-info-content'>{{detail.deptName}}</span>
+                  </li>
+                  <li>
+                      <span class='esn-contact-search-info-title'>职位</span>
+                      <span class='esn-contact-search-info-content'>{{detail.duty}}</span>
+                  </li>
+              </ul>
+        </div>
+
+
+
+        <div class='esn-contact-search-bottom'>
+              <div class='esn-contact-search-bottom-content' ng-click="openMsgDialog(detail)">
+                  <span class='esn-contact-search-bottom-logo icon-web_icon_message_dynamic'></span>
+                  <span class='esn-contact-search-bottom-text'>发消息</span>
+              </div>
+              <div class='esn-contact-search-bottom-content' ng-click="go2dudu(detail.member_id)">
+                  <span class='esn-contact-search-bottom-logo icon-web_icon_dudu'></span>
+                  <span class='esn-contact-search-bottom-text'>嘟嘟</span>
+              </div>
+              <div class='esn-contact-search-bottom-content' ng-click="go2weimail(detail.member_id)">
+                  <span class='esn-contact-search-bottom-logo icon-web_icon_mail_selected'></span>
+                  <span class='esn-contact-search-bottom-text'>微邮</span>
+              </div>
+        </div>
+    </div>
+</div>

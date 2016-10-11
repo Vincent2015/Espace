@@ -1,0 +1,29 @@
+
+<div class="c-search">
+  <input placeholder="搜索" ng-model="search_keyword_p" type='text'>
+</div>
+
+<div class="c-p-list">
+  <div class="c-p-w" ng-repeat="each in personList" ng-if="!search_keyword_p">
+    <div class="p-checkbox-cell">
+      <!-- <img class="p-info-cell-img" ng-src="{{each.avatar || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+      <headerphoto item="each"></headerphoto>
+    </div>
+    <div class="p-info-cell">
+      <span class="p-info-cell-name">{{each.name}}</span>
+      <div class="esn-follow-add-checkbox" ng-click="PersonListManager.addOnePerson($event, {id: each.id || each.userid || each.member_id});"></div>
+    </div>
+  </div>
+
+  <div class="c-p-w" ng-repeat="each in personListSearch" ng-if="search_keyword_p">
+    <div class="p-checkbox-cell">
+      <headerphoto item="each"></headerphoto>
+      <!-- <img class="p-info-cell-img" ng-src="{{each.avatar || 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+    </div>
+    <div class="p-info-cell">
+      <span class="p-info-cell-name">{{each.name}}</span>
+      <div class="esn-follow-add-checkbox" ng-click="PersonListManager.addOnePerson($event, {id: each.id || each.userid || each.member_id});"></div>
+    </div>
+  </div>
+
+</div>

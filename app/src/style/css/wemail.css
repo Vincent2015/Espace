@@ -1,0 +1,31 @@
+.wemail{
+    background-color: #FFFFFF;
+}
+.wemail .header{
+  float: right;
+  margin-right: 40px;
+}
+.wemail_content{
+  margin-top: 10px;
+  background-color: #FFFFFF;
+  font-size: 14px;
+  color: #292F33;
+  height: 540px;
+  width: 548px;
+}
+.wemail_content .btn{
+  background-color: #F0F4F6;
+  width: 32px;
+  height: 39px;
+  line-height: 26px;
+  border-radius:45px;
+  color: #99B9D1;
+  display: inline-table;
+  float: right;
+}
+.wemail_content .item{
+  height: 48px;
+  line-height: 48px;
+  margin: auto 15px;
+  border-bottom: 1px solid #EBEFF4;
+}

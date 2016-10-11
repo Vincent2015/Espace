@@ -1,0 +1,49 @@
+<div class="esn-right-dialog" ng-init = "init()">
+
+  <div class="c-head-table">
+    <div class="c-head-table-cell-i">
+
+    </div>
+    <div class="c-head-table-cell-t">
+      文件记录
+    </div>
+    <div class="c-head-table-cell-i">
+      <span class="icon-web_icon_close cell-icon-adjust" ng-click="closeDiag()" style="color: #96c2e6;"></span>
+    </div>
+
+  </div>
+
+  <div class="c-p-container c-filelist-container" style="bottom:0px">
+
+    <div class="file-item-flex" ng-repeat="each in fileList">
+      <img ng-src="{{each.img_filetype}}" class="file-img">
+      <div class="file-content">
+        <div class="file-head file-text-overflow">
+          {{each.fileName}}
+        </div>
+        <div>
+          <span class="file-detail">{{each.format_filetime}}</span>
+          <span class="file-detail margin-adjust">{{each.text_filesize}}</span>
+          <!-- <span class="file-pname">{{each.creator}}</span> -->
+
+        </div>
+      </div>
+      <div class="file-icon-w">
+        <a  href="{{each.attachId}}" noopen="true"  imopenurl download target="_top" class="file-down-a">
+          <span class="icon-web_icon_download esn-down-icon "></span>
+        </a>
+        <!-- <span class="icon-web_icon_visible esn-file-icon" ng-class="{active : color.active}" ng-click="color.active = !color.active"></span> -->
+
+      </div>
+
+
+    </div>
+
+    <div class="c-org-spreadall" ng-if="fileList.length == 0 || !fileList">
+          暂无文件
+    </div>
+
+
+  </div>
+
+</div>

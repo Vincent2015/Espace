@@ -1,0 +1,83 @@
+<div class="esn-im-container-nav">
+  <div class="esn-im-search">
+    <div class="esn-c-search">
+      <input type="text" class="esn-input-search" placeholder="搜索团队/联系人"  ng-model="contactSearchModule.search"/>
+      <span class="icon-web_icon_delete esn-c-search-cross" ng-click="contactSearchModule.delsearch()" ng-show='isShowSearchResult'></span>
+    </div>
+    <div class="search-loading-animation" ng-show='contactSearchModule.showloading'>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+  <div class='esn-im-search-nodata-prompt' ng-show='contactSearchModule.showDataPrompt'>没有找到对应数据</div>
+  <ul class="esn-im-c-ul" ng-show='contactSearchModule.showMenu'>
+    <li class="esn-im-c-li active" ui-sref=".friend">
+      <div class="esn-im-li-ico">
+        <div class="esn-li-icon icon-recent-contacts"></div>
+      </div>
+      <div class="esn-im-li-text">最近联系人</div>
+    </li>
+    <li class="esn-im-c-li " ui-sref=".organization">
+      <div class="esn-im-li-ico">
+        <div class="esn-li-icon icon-organizational-structure"></div>
+      </div>
+      <div class="esn-im-li-text">组织架构</div>
+    </li>
+    <li class="esn-im-c-li" ui-sref=".teamlist">
+      <div class="esn-im-li-ico">
+        <div class="esn-li-icon icon-my-team"></div>
+      </div>
+      <div class="esn-im-li-text">我的团队</div>
+    </li>
+    <li class="esn-im-c-li" ui-sref=".talkgroup">
+      <div class="esn-im-li-ico">
+        <div class="esn-li-icon icon-my-group"></div>
+      </div>
+      <div class="esn-im-li-text">我的群组</div>
+    </li>
+    <li class="esn-im-c-li" ui-sref=".followers">
+      <div class="esn-im-li-ico">
+        <div class="esn-li-icon icon-my-concern"></div>
+      </div>
+      <div class="esn-im-li-text">我的关注</div>
+    </li>
+  </ul>
+
+
+<div class='esn-im-search-result' ng-show='isShowSearchResult' ng-if='contactSearchModule.searchResult.contacts_list.length >0 || contactSearchModule.searchResult.team_list.length > 0' ng-keyup='chooseItem($event)'>
+  <div class='esn-im-search-result-member' ng-if='contactSearchModule.searchResult.contacts_list && contactSearchModule.searchResult.contacts_list.length > 0'>
+    <div class='esn-im-search-result-title'>联系人</div>
+    <ul class="esn-im-search-result-ul">
+      <li class="esn-im-search-result-li" ng-repeat="item in contactSearchModule.searchResult.contacts_list" ng-click='contactSearchModule.activeLi($event)' ui-sref='.showContactSearchDetail({id:item.muid,deptName:item.dept_name})'>
+        <div class="esn-im-li-ico">
+          <headerphoto item="item"></headerphoto>
+        </div>
+        <div class="esn-im-li-text text-ellipsis">{{item.uname}}</div>
+      </li>
+      <li class='esn-im-search-more' ng-if='contactSearchModule.moreMemberTemp.length > 0' ng-click='contactSearchModule.moreMember(contactSearchModule.search)'>加载更多...</li>
+
+    </ul>
+  </div>
+  <div class='esn-im-search-result-group' ng-if='contactSearchModule.searchResult.team_list && contactSearchModule.searchResult.team_list.length > 0'>
+    <div class='esn-im-search-result-title'>团队</div>
+    <ul class="esn-im-search-result-ul">
+      <li class="esn-im-search-result-li" ng-repeat="item in contactSearchModule.searchResult.team_list"  ng-click='contactSearchModule.activeLi($event,item.gid)'>
+        <div class="esn-im-li-ico">
+          <img ng-src="{{item.avatar}}" onerror="this.src='src/style/images/avt_default.png'"/>
+        </div>
+        <div class="esn-im-li-text text-ellipsis" >{{item.group_name}}</div>
+      </li>
+
+      <li class='esn-im-search-more' ng-if='contactSearchModule.moreGroupTemp.length > 0' ng-click='contactSearchModule.moreGroup(contactSearchModule.search)'>加载更多...</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+</div>
+<div class="esn-im-container-main"  ui-view>
+
+</div>

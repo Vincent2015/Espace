@@ -1,0 +1,38 @@
+<div id="usercard" ng-controller="ownController">
+      <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()">
+              ×
+          </span>
+          <div class="usericon" style="text-align: -webkit-center;">
+              <headerphoto item="esnUser" size="76"></headerphoto>
+              <!-- <img ng-src="{{esnUser.avatar_middle}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+              <span>{{esnUser.uname}}</span>
+          </div>
+
+      </header>
+       <section>
+           <ul>
+               <li>
+                   <label>手机</label>
+                   <span class='esn-usecard-item' ng-if="esnUser.mobile">{{esnUser.mobile}}</span>
+                   <span class='esn-usecard-item' ng-if="!esnUser.mobile">无</span>
+               </li>
+               <li>
+                   <label>邮箱</label>
+                   <span class='esn-usecard-item' ng-if="esnUser.email">{{esnUser.email}}</span>
+                   <span class='esn-usecard-item' ng-if="!esnUser.email">无</span>
+               </li>
+                 <li>
+                   <label>部门</label>
+                   <span class='esn-usecard-item' ng-if="esnUser.dept_name">{{esnUser.dept_name}}</span>
+                   <span class='esn-usecard-item' ng-if="!esnUser.dept_name">无</span>
+               </li>
+                 <li>
+                   <label>职位</label>
+                   <span class='esn-usecard-item' ng-if="esnUser.duty">{{esnUser.duty}}</span>
+                   <span class='esn-usecard-item' ng-if="!esnUser.duty">无</span>
+               </li>
+           </ul>
+
+       </section>
+</div>

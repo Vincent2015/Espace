@@ -1,0 +1,105 @@
+<div class="esn-right-container">
+  <!--已经绑定嘟嘟界面-->
+  <div ng-if="isBindDuDu">
+    <div class="content-head-table">
+      <div class="me-left-text">
+        <span>我的嘟嘟</span>
+      </div>
+      <div class="me-right-text">
+        <span class="icon-help icon-reset"></span>
+        <span class="icon-text" ng-click="charge($event)">充值</span>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="phone-time-wrapper">
+        <div class="phone-time-block">
+          <span class="icon-web_icon_dudu_selected icon-p"></span>
+        </div>
+        <div class="phone-time-block" style="margin-top: -8px;">
+          <span class="c-text">已用<span class="used-time">4000</span><span class="unused-time">/8000</span>分钟</span>
+        </div>
+
+      </div>
+      <div class="me-list-phone">
+        <div class="list-wrapper">
+          <div class="list-header">
+            <div class="list-header-cell">
+              通话时间
+            </div>
+            <div class="list-header-cell" style="text-align:center">
+              联系人
+            </div>
+            <div class="list-header-cell" style="text-align:right">
+              通话时长
+            </div>
+          </div>
+          <div class="list-content">
+            <div class="list-content-table-wrapper" ng-repeat="each in phone_history">
+              <div class="list-header-cell">
+                {{each.time}}
+              </div>
+              <div class="list-header-cell" style="text-align:center">
+                {{each.name}}
+              </div>
+              <div class="list-header-cell" style="text-align:right">
+                {{each.time0}}
+              </div>
+            </div>
+            <div class="list-content-table-wrapper list-foot" >
+              加载更多
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="line-divide-w">
+        <span>通话券</span>
+      </div>
+
+      <div class="me-phone-ticket">
+        <div class="response-cell" ng-repeat="each in tickets" >
+
+              <div class="ticket-w">
+                <img class="headImg"  ng-src="src/style/images/dudu/bg_ticket.png">
+                <div class="ticket-text-w">
+                  <div >
+                    <span class="ticket-text-w-num">140</span>
+                    <span class="ticket-text-w-miu">分钟</span>
+                  </div>
+                  <div class="ticket-text-w-date">
+                    有效日期截至
+                    2016-19-98
+                  </div>
+                </div>
+
+              </div>
+
+
+        </div>
+      </div>
+      <div style="height:16px;clear:both">
+
+      </div>
+    </div>
+  </div>
+
+  <!--未绑定嘟嘟界面-->
+  <div class="unbind-container" ng-if="!isBindDuDu">
+    <div style="margin-bottom:26px;">
+      <img src="src/style/images/dudu/image_unbound.png">
+    </div>
+    <div style="color:#8899A6">
+      你未绑定嘟嘟,请绑定嘟嘟后进行通话
+    </div>
+
+    <div class="btn-charge" ng-click="phoneBind($event)" style="width:160px">
+        绑定手机号
+    </div>
+
+  </div>
+
+
+
+</div>

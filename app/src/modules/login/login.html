@@ -1,0 +1,70 @@
+<div class="esn-box-header">
+
+</div>
+<div class="esn-login-container">
+  <div class="esn-g-box">
+    <span class="esn-g-btn esn-red" onclick="closewin()"></span>
+    <span class="esn-g-btn esn-yellow" onclick="min()"></span>
+    <span class="esn-g-btn esn-green" onclick="max()"></span>
+  </div>
+
+  <div class="esn-login-box">
+    <div class="esn-login-box-header">
+      <div class="esn-box-header-icon">
+        <div class="esn-box-info-icon">
+            <img style="border-radius: 80px; width: 80px; height: 80px;" src="src/style/images/login_logo.png">
+        </div>
+      </div>
+      <div class="esn-box-header-tab">
+        <div class="esn-header-tab-btn">
+          <label class="esn-tab-btn-lable" ng-click="onTab($event)">快捷登录</label>
+        </div>
+        <div class="esn-tab-separator"></div>
+        <div class="esn-header-tab-btn">
+          <label class="esn-tab-btn-lable active" ng-click="onTab($event)">账户登录</label>
+        </div>
+      </div>
+    </div>
+    <div class="esn-login-box-content">
+      <div class="esn-login-box-Qr">
+        <div id="esn-qrcode" class="esn-qrcode"></div>
+        <div class="esn-qrcode-info">请用企业空间App二维码扫描登录，<span class="esn-qrcode-flush" ng-click="LoginModule.flushqrcode()">刷新<span></div>
+      </div>
+      <div class="esn-login-box-account">
+        <form>
+          <div class="esn-box-account-row underline">
+            <div class="esn-login-box-input icon-web_icon_username form-icon-adjust">
+              <input type="text" class="esn-login-input" name="username" id="username" placeholder="手机号/邮箱" autofocus="autofocus" autocomplete="on" tabindex="1" ng-model="LoginModule.username" />
+              <span class="icon-web_icon_delete esn-login-box-cross" ng-click="LoginModule.delUsername()" ng-hide='LoginModule.showDelUserNameIcon'></span>
+            </div>
+          </div>
+          <div class="esn-box-account-row underline">
+            <div class="esn-login-box-input icon-web_icon_password form-icon-adjust">
+              <input type={{LoginModule.passwordType}} class="esn-login-input" name="password" id="userpwd" placeholder="密码"  tabindex="2" ng-model="LoginModule.password"/>
+              <span class="icon-web_icon_visible esn-login-box-eye" ng-class="{active : color.active}"  ng-click="LoginModule.lookPwd();color.active = !color.active"></span>
+            </div>
+          </div>
+          <div class="esn-box-account-row esn-login-box-layout">
+            <label class="avepwd"><input type="checkbox" id="cb-savepwd" ng-click='LoginModule.savepwd = !LoginModule.savepwd' ng-checked="LoginModule.savepwd" class="cb-savepwd"/>自动登录</label>
+            <a class="forgotPwd"  ng-click='LoginModule.goto("http://pub.esn.ren/account/lostpasswd/index")'>忘记密码</a>
+          </div>
+
+          <div class="esn-box-account-row">
+            <button class="esn-login-btn"  ng-class="{active : LoginModule.username && LoginModule.password && LoginModule.password.length > 0}" tabindex="3" ng-click="LoginModule.login();">登录</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="esn-login-box-foot">
+      <div class="esn-login-box-foot-three"></div>
+      <div class="esn-login-box-foot-register">
+        <!-- http://pub.esn.ren ／／http://123.103.9.204:91-->
+        <a class="register" ng-click='LoginModule.goto("http://pub.esn.ren/account/reg/beginUser")'>新用户注册</a>
+      </div>
+    </div>
+  </div>
+  <div class="esn-login-foot">
+    您专属的社交化业务平台
+  </div>
+</div>

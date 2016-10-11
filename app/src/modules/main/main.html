@@ -1,0 +1,181 @@
+
+<div ng-init="init()">
+
+	<div class="esn-im-header">
+		<span class='esn-im-header-warp'>
+			<span onclick="closewin()">
+				<span class="esn-state-btn esn-red"></span>
+			</span>
+			<span class="esn-state-btn esn-yellow" onclick="min()"></span>
+			<span class="esn-state-btn esn-green" onclick="max()"></span>
+		</span>
+			<span  ng-click="q_click_action($event)" class="esn-text-w">
+				<span class="icon-web_icon_teamlist esn-q-icon"></span>
+				<span class="esn-q-text">{{q_name}}</span>
+				
+				<span class="reddot" ng-if="getunUnReadmessageOtherTotalCounts()>0"></span>
+				
+			</span>
+			<!-- <div class="esn-square-tip" ng-show="isShow" ng-if="q_list_inner"></div> -->
+			<!-- <div class="esn-q-list" ng-show="isShow" ng-if="q_list_inner"> -->
+			<div class="esn-q-list" ng-show="isShow">
+				<ul>
+					<!-- <li class="h-li">
+						内部空间
+					</li>
+					<li ng-repeat="each in q_list_inner" ng-click="switch_q(each.qz_id)"  ng-class="{true: 'active', false: ''}[each.qz_id == c_qz_id]" >
+						<span class="reddot" ng-if="getunReadedSpaceNum(each)<=99 && getunReadedSpaceNum(each)>0" ng-bind="getunReadedSpaceNum(each)"></span>
+						<span class="reddot" ng-if="getunReadedSpaceNum(each)>99">...</span>
+						{{each.short_name}}
+						<span  ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[each.qz_id == c_qz_id]"></span>
+					</li>
+					<li class="h-li">
+						外部空间
+					</li>
+					<li ng-repeat="each in q_list_outer" ng-click="switch_q(each.qz_id)" ng-class="{true: 'active', false: ''}[each.qz_id == c_qz_id]" >
+						<span class="reddot" ng-if="getunReadedSpaceNum(each)<=99 && getunReadedSpaceNum(each)>0" ng-bind="getunReadedSpaceNum(each)"></span>
+						<span class="reddot" ng-if="getunReadedSpaceNum(each)>99">...</span>
+						{{each.short_name}}
+						<span ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[each.qz_id == c_qz_id]"></span>
+					</li> -->
+                     <li ng-repeat="each in q_list" ng-click="switch_q(each.qz_id)"  ng-class="{true: 'active', false: ''}[each.qz_id == c_qz_id]" >
+                        <img src="./src/style/css/images/ms.png" ng-if="!each.isOuter">
+						<span class="reddot" ng-if="getunReadedSpaceNum(each)<=99 && getunReadedSpaceNum(each)>0 && each.qz_id!=c_qz_id" ng-bind="getunReadedSpaceNum(each)"></span>
+						<span  class="reddot" ng-if="getunReadedSpaceNum(each)>99 && each.qz_id!=c_qz_id">...</span>
+						{{each.short_name}}
+						<!-- <span  ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[each.qz_id == c_qz_id]"></span> -->
+						<span ng-if="each.qz_id==c_qz_id" ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[each.qz_id == c_qz_id]"></span>
+
+						<img src="./src/style/css/images/es.png" ng-if="each.isOuter=='1'">
+
+						<ul ng-if="each.subChildren.length" style="margin-bottom:-12px;margin-left:10px;border-top:solid 1px #EBEFF4;margin-top:12px;">
+	                        <li ng-repeat="item in each.subChildren" ng-click="switch_q(item.qz_id)"  ng-class="{true: 'active', false: ''}[item.qz_id == c_qz_id]" >
+	                       <!--  <img src="./src/style/css/images/ms.png"> -->
+							<span class="reddot" ng-if="getunReadedSpaceNum(item)<=99 && getunReadedSpaceNum(item)>0 && each.qz_id!=c_qz_id" ng-bind="getunReadedSpaceNum(item)"></span>
+							<span  class="reddot" ng-if="getunReadedSpaceNum(item)>99 && item.qz_id!=c_qz_id">...</span>
+							{{item.short_name}}
+							<!-- <span  ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[each.qz_id == c_qz_id]"></span> -->
+							<span ng-if="item.qz_id==c_qz_id" ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[item.qz_id == c_qz_id]"></span>
+							 <img src="./src/style/css/images/es.png" ng-if="item.isOuter == '1'" >
+							</li>
+
+<!-- 							<li ng-repeat="item in each.subChildren" ng-click="switch_q(item.qz_id)"  ng-if="item.isOuter == '1'" ng-class="{true: 'active', false: ''}[item.qz_id == c_qz_id]">
+							<span  class="reddot" ng-if="getunReadedSpaceNum(item)<=99 && getunReadedSpaceNum(item)>0 && item.qz_id!=c_qz_id" ng-bind="getunReadedSpaceNum(item)"></span>
+							<span class="reddot" ng-if="getunReadedSpaceNum(item)>99 && each.qz_id!=c_qz_id">...</span>
+							{{item.short_name}}
+							<span  ng-if="item.qz_id==c_qz_id" ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[item.qz_id == c_qz_id]"></span>
+							 <img src="./src/style/css/images/es.png">
+						  </li> -->
+						</ul>
+
+					</li>
+
+					<!--  <li ng-repeat="each in q_list" ng-click="switch_q(each.qz_id)"  ng-if="each.isOuter == '1'" ng-class="{true: 'active', false: ''}[each.qz_id == c_qz_id]">
+						<span  class="reddot" ng-if="getunReadedSpaceNum(each)<=99 && getunReadedSpaceNum(each)>0 && each.qz_id!=c_qz_id" ng-bind="getunReadedSpaceNum(each)"></span>
+						<span class="reddot" ng-if="getunReadedSpaceNum(each)>99 && each.qz_id!=c_qz_id">...</span>
+						{{each.short_name}}
+						<span  ng-if="each.qz_id==c_qz_id" ng-class="{true: 'icon-web_icon_selected web_selected_adjust', false: ''}[each.qz_id == c_qz_id]"></span>
+						 <img src="./src/style/css/images/es.png">
+					</li> -->
+
+				</ul>
+			</div>
+			<div class="esn-main-head-drap">
+
+			</div>
+			<div class="esn-main-h-feedback" ng-click="feedback()">
+				<span class="icon-web_icon_message_selected selected-position-adjust"></span>
+				<span>反馈</span>
+			</div>
+	</div>
+	<div class="esn-im-container">
+	<div class="esn-im-left-nav">
+		<div class="esn-user-head" ng-click="showUserInfo()">
+			<!-- <headerphoto item="esnUser"></headerphoto> -->
+			<img ng-src="{{esnUser.avatar_middle}}" style="width: 100%;height: 100%;border-radius: 30px;" ng-click="showUserInfo()">
+		</div>
+		<!-- <div class="esn-im-nav-row active" ui-sref="main.imhome">
+			<span></span>
+			<label class="icon-web_icon_message_selected esn-im-icon"></label>
+			<label class="esn-im-text">消息</label>
+		</div> -->
+		<div class="esn-im-nav-row active" ui-sref="main.imhomeplus" id="message_mod">
+			<span ng-if="getunUnReadmessageTotalCounts()<=99 && getunUnReadmessageTotalCounts()>0" ng-bind="getunUnReadmessageTotalCounts()"></span>
+
+			<span ng-if="getunUnReadmessageTotalCounts()>99">...</span>
+			<label class="icon-web_icon_message_selected esn-im-icon"></label>
+			<label class="esn-im-text">消息</label>
+		</div>
+		<div class="esn-im-nav-row " ui-sref="main.contact.friend">
+			<span></span>
+			<label class="icon-web_icon_contacts_selected esn-im-icon"></label>
+			<label class="esn-im-text">联系人</label>
+		</div>
+		<div class="esn-im-nav-row"  ui-sref="main.app" style="display:none;">
+			<span></span>
+			<label class="icon-web_icon_application_selected esn-im-icon"></label>
+			<label class="esn-im-text">应用</label>
+		</div>
+		<div class="esn-im-nav-row" ui-sref="main.dudu.me" style="display:none;">
+			<span></span>
+			<label class="icon-web_icon_dudu_selected esn-im-icon"></label>
+			<label class="esn-im-text">嘟嘟</label>
+		</div>
+		<div class="esn-im-nav-row" ui-sref="main.wemail" style="display:none;">
+			<span></span>
+			<label class="icon-web_icon_mail_selected esn-im-icon"></label>
+			<label class="esn-im-text">微邮</label>
+		</div>
+
+		<div class="esn-setting">
+			<span></span>
+			<label class="icon-web_icon_add_selected esn-setting-icon" ng-click='trogglePromotion("add")'></label>
+			<span></span>
+			<label class="icon-web_icon_discover_selected esn-setting-icon" ng-click="uncultivated()"></label>
+			<span></span>
+			<label class="icon-web_icon_set_selected esn-setting-icon" ng-click='trogglePromotion("setting")'></label>
+			<label class="esn-im-text"></label>
+		</div>
+
+	</div>
+
+	<div class="esn-im-container-main" style="left:69px" ui-view ng-controller="mainCtrl">
+
+	</div>
+	</div>
+
+
+
+
+<div class="esn-logo-promotion" ng-style="promotionitem.style" ng-show='promotion'>
+		<div class="esn-pro-item" ng-show='promotionitem.setting' ng-click="systemSetting()">
+				系统设置
+		</div>
+		<div class="esn-pro-item" ng-show='promotionitem.setting' style="display:none;">
+				应用下载
+		</div>
+		<div class="esn-pro-item" ng-show='promotionitem.setting' style="display:none;">
+				修改密码
+		</div>
+		<div class="esn-pro-item" ng-click='aboutUs()' ng-show='promotionitem.setting' >
+				关于我们
+		</div>
+		<div class="esn-pro-item" ng-click="logout()" ng-show='promotionitem.setting'>
+				退出登录
+		</div>
+		<div class="esn-pro-item" style="border-top:none;" ng-if='qz_user_type == 0' ng-click="createNomalGroup()" ng-show='promotionitem.add'>
+				创建聊天
+		</div>
+		<div class="esn-pro-item" style="border-top:none;" ng-if='qz_user_type != 0 && qz_user_type != 1' ng-show='promotionitem.add'>
+				没有权限
+		</div>
+		<div class="esn-pro-item" style="border-top:none;" ng-if='qz_user_type == 1' ng-click="createDealerChatGroup()" ng-show='promotionitem.add'>
+				创建经销商群
+		</div>
+		<!-- <div class="esn-pro-item" ng-click="uncultivated()" ng-show='promotionitem.add'>
+				创建团队
+		</div> -->
+</div>
+
+<div class="esn-logo-promotion-mask" ng-show="promotion" ng-click="trogglePromotion()"></div>
+</div>

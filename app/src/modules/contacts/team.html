@@ -1,0 +1,77 @@
+<div class="esn-right-container ">
+  <div class="content-head" style="position:relative;">
+    <span style="font-weight: normal;color:#007ddc;cursor:pointer" ng-click="goBack()">我的团队</span>
+    <span class="icon-web_icon_goto" style="position: relative;top: 1px;color:#007ddc"></span>
+    <span>{{group_name}}</span>
+    <span ng-click="createTeamGroupChat()">
+      <span style="position:absolute;right:85px;color:#007ddc;font-weight: normal;  font-size: 19px;  cursor: pointer;" class="icon-web_icon_team"></span>
+      <span style="position:absolute;right:20px;color:#007ddc;font-weight: normal;  cursor: pointer;  padding-left: 20px;">进入团队</span>
+    </span>
+
+
+  </div>
+
+  <div class="content-body" ng-if="groupMananger">
+    <div class="line-divide-wrapper" ng-click="toggleDisplayClass($event)">
+      <div class="table-cell">团队管理员</div>
+      <div class="table-cell ">
+      <div class="triangle triangle-down">
+      </div>
+      </div>
+    </div>
+
+
+    <div class="content-group-wrapper">
+      <div class="group-wrapper">
+        <div class="float-item-org" ng-repeat="each in groupMananger.adminList"  ng-click="userCard(each.member_id,each)">
+
+            <div class="content-cell" style="width:52px">
+              <!-- <img class="headImg" ng-src="{{each.avatar}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+  					  <headerphoto item="each"></headerphoto>
+            </div>
+            <div class="content-cell">
+              <div class="people-name" style="">{{each.name}}</div>
+              <div class="people-duty" ng-if="each.duty">{{each.duty}}</div>
+              <div class="people-duty" ng-if="!each.duty">&nbsp;</div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="line-divide-wrapper" ng-click="toggleDisplayClass($event)">
+      <div class="table-cell">团队成员</div>
+      <div class="table-cell ">
+      <div class="triangle triangle-down">
+      </div>
+      </div>
+    </div>
+
+    <div class="content-group-wrapper">
+      <div class="group-wrapper">
+
+        <div ng-if="!groupMananger.memberList" style="text-align: -webkit-center;padding: 8px;">
+          暂无组织成员
+        </div>
+        <div class="float-item-org" ng-repeat="each in groupMananger.memberList"  ng-click="userCard(each.member_id,each)">
+
+            <div class="content-cell" style="width:52px">
+  					  <headerphoto item="each"></headerphoto>
+              <!-- <img class="headImg" ng-src="{{each.avatar}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+            </div>
+            <div class="content-cell">
+              <div class="people-name" style="">{{each.name}}</div>
+              <div class="people-duty" ng-if="each.duty">{{each.duty}}</div>
+              <div class="people-duty" ng-if="!each.duty">&nbsp;</div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</div>

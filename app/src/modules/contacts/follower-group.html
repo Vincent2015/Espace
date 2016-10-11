@@ -1,0 +1,39 @@
+<div id="followgroup">
+      <header>
+          <span class="esn-card-close" ng-click="closeThisDialog()">
+              ×
+          </span>
+          管理分组
+      </header>
+
+<aside>
+  <ul>
+    <li ng-repeat="each in FollowGroup"  class="{{followId == each.id ? 'active ' : ''}}" ng-click="followClick(each.id)">
+        {{each.name}}
+        <span class="esn-follow-del" ng-click="delGroup()" ng-if="each.id != 0">删除</span>
+    </li>
+  </ul>
+  <div class="addgroup" ng-click="addgroup($event)">添加分组</div>
+  <div class="newgroup">
+    <input type="text" ng-model="group.name" placeholder="请输入分组名称">
+    <button ng-click="saveGroup()">保存</button>
+  </div>
+</aside>
+<div class="grouplist">
+  <header ng-if="followId != 0">
+     <div class="addgroup" ng-click="addfollow()"><span style="font-size: 20px">+</span>添加成员</div>
+  </header>
+  <ul ng-repeat="each in FollowGroup" ng-if="each.id == followId" >
+    <li ng-repeat="rows in each.dataList.data" ng-click="$parent.rowsClick($event)">
+      <img ng-src="{{rows.avatar}}" onerror="this.src='src/style/images/avt_default.png'" >
+      <div class="left">
+        <h3>{{rows.name}}</h3>
+        <h4>{{rows.mp_duty}}</h4>
+      </div>
+      <div class="right" ng-click="delfollow(rows.member_id)">
+        移除
+      </div>
+    </li>
+  </ul>
+</div>
+</div>

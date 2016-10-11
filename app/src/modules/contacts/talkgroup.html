@@ -1,0 +1,30 @@
+<div class="esn-right-container ">
+  <div class="content-head" style="border-bottom:1px solid #ededed;">
+    <span>我的群组</span>
+  </div>
+
+  <div class="content-group sub-org my_groups" >
+    <div ng-if="sub.talkgroup.length == 0" style="text-align: -webkit-center;padding: 8px;">
+      暂无群组
+    </div>
+      <!-- ng-if='qz_user_type == 1 ||  qz_user_type ==0'  非经销商或者管理员才能看到 -->
+   <!--  <div  ng-repeat="each in sub.talkgroup" ng-if='each.from.groupType == undefined && (qz_user_type == 1 || qz_user_type ==0)'  class="table-wrapper" ui-sref="main.contact.talkgroupDetail({gid: each.id,group_name:each.name})">
+      <div class="">
+          <headerphoto item="each"></headerphoto>
+          <lable style="margin-left:52px;width: 300px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display: inline-block;"> {{each.name}}</lable>
+      </div>
+      <div class="" style="width: 60px;text-align: right;padding-right: 12px;">
+          <span style="color:#B7C0C7">{{each.from.numberOfMembers}}</span>
+          <span class="icon-web_icon_goto" style="position:relative;top:1px"></span>
+      </div>
+    </div> -->
+     <ul>
+       <li ng-repeat="each in sub.talkgroup" ng-if='each.from.groupType == undefined && (qz_user_type == 1 || qz_user_type ==0)'  class="table-wrapper" ui-sref="main.contact.talkgroupDetail({gid: each.id,group_name:each.name})" style="padding:6px 10px">
+          <headerphoto item="each"></headerphoto>
+          <span style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin-left:5px;display: inline-block;width: 300px;vertical-align:middle;">{{each.name}}</span>
+       </li>
+     </ul>
+
+  </div>
+
+</div>

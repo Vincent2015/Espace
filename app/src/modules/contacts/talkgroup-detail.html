@@ -1,0 +1,55 @@
+<div class="esn-right-container ">
+  <div class="content-head" style="position:relative;">
+    <span class="text-ellipsis" style="width:420px;display:inline-block;">群组/{{entity.name}}</span>
+    <span style="position:absolute;right:20px;color:#007ddc;cursor: pointer;" ng-click="goToMessage(entity)">进入群组</span>
+  </div>
+
+  <div class="line-divide-wrapper">
+    <div class="table-cell">群组管理员</div>
+    <div class="table-cell " style="width:94px">
+    <div class="triangle-down">
+    </div>
+    </div>
+  </div>
+
+  <div class="content-host-w">
+    <div class="esn-header-plate">
+      <div class="content-cell" style="width:52px">
+
+        <headerphoto item="entity"></headerphoto>
+        <!-- <img class="headImg" ng-src="{{entity.owner.avatar ? entity.owner.avatar : 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+      </div>
+      <div class="content-cell" ng-click="userCard(entity.owner.id,entity)">
+        <div class="people-name" style="">{{entity.owner.name}}</div>
+        <div style="font-size:12px;color:#B7C0C7">{{entity.owner.duty}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="line-divide-wrapper">
+    <div class="table-cell">群组成员</div>
+    <div class="table-cell " style="width:94px">
+    <div class="triangle-down">
+    </div>
+    </div>
+  </div>
+
+  <div class="content-group-wrapper">
+    <div class="group-wrapper">
+      <div class="float-item-org" ng-repeat="each in entity.list"  ng-click="userCard(each.id,each)">
+          <div class="content-cell" style="width:52px">
+					  <headerphoto item="each"></headerphoto>
+            <!-- <img class="headImg" ng-src="{{each.avatar ? each.avatar : 'src/style/images/avt_default.png'}}" onerror="this.src='src/style/images/avt_default.png'"> -->
+          </div>
+          <div class="content-cell">
+            <div class="people-name" style="">{{each.name}}</div>
+            <div style="width: 78px;font-size: 12px;color: #B7C0C7;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{each.duty}}</div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,13 @@
+<div class="c-list-table" ng-repeat="each in FollowGroup" ng-click="go_to_detail_sub({type:'follower', id: each.id})">
+  <div class="c-li-cell-text">
+    {{each.name}}
+  </div>
+  <div class="c-li-cell-icon">
+    <span class="text-small-color">{{each.userNum}}</span>
+    <span class="icon-web_icon_goto icon-adjust"></span>
+  </div>
+</div>
+
+<div class="c-org-spreadall" ng-if="FollowGroup.length == 0 || !FollowGroup">
+  暂无分组
+</div>
